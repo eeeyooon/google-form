@@ -1,10 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Form } from './pages';
+import { Form, Preview, Submit } from './pages';
 function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Form />} />
+				<Route path="/preview" element={<Preview />} />
+				<Route path="/submit" element={<Submit />} />
 			</Routes>
 		</BrowserRouter>
 	);
