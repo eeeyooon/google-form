@@ -15,6 +15,11 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     font-family: Roboto;
     min-width: 320px;
+    background-color:#F0EBF8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   a {
     text-decoration: none;

@@ -8,6 +8,7 @@ export const TitleSectionWrapper = styled.div`
 	margin-top: 12px;
 	border-top: 10px solid ${({ theme }) => theme.color.primary};
 	position: relative;
+	overflow: hidden;
 `;
 
 export const InputWrapper = styled.div`
