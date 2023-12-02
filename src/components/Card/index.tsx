@@ -1,13 +1,12 @@
-import SelectType from '../SelectType';
-import { CardWrapper, CardHeader, InputCardTitle } from './styles';
+import CardFooter from '../CardFooter';
+import CardHeader from '../CardHeader';
+import { CardWrapper } from './styles';
 
 export default function Card() {
 	return (
 		<CardWrapper>
-			<CardHeader>
-				<InputCardTitle id="question-input" variant="filled" placeholder="질문" multiline />
-				<SelectType />
-			</CardHeader>
+			<CardHeader />
+			<CardFooter />
 		</CardWrapper>
 	);
 }
