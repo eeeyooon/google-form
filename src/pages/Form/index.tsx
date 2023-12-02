@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import TitleSection from '../../components/TitleSection';
 import SideMenu from '../../components/SideMenu';
+import Card from '../../components/Card';
 
 export default function Form() {
 	return (
 		<FormWrapper>
 			<TitleSection />
 			<SideMenu />
+			<Card />
 		</FormWrapper>
 	);
 }

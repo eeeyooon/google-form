@@ -11,7 +11,7 @@ export const defaultTheme: DefaultTheme = {
 		mediumgray: '#B9B9B9',
 		lightgray: '#DADCE0',
 		hovergray: '#f1f3f4',
-		inputngray: '#f8f9fa',
+		inputgray: '#f8f9fa',
 		black: '#1c1c1c',
 		white: '#ffffff',
 	},

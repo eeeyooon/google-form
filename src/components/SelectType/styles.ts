@@ -7,6 +7,9 @@ export const TypeSelect = styled(Select)`
 	height: 45px;
 	padding-left: 5px;
 	line-height: 45px;
+	fieldset {
+		border: 1px solid ${({ theme }) => theme.color.lightgray} !important;
+	}
 `;
 
 export const TypeItem = styled(MenuItem)`

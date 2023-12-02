@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FormControl, SelectChangeEvent } from '@mui/material';
-import { TypeSelect, TypeItem } from './style';
+import { TypeSelect, TypeItem } from './styles';
 
 export default function SelectType() {
 	const [questionType, setQuestionType] = useState('RadioType');
