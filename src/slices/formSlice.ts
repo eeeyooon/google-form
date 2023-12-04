@@ -29,8 +29,20 @@ export const formSlice = createSlice({
 		updateFormDesc: (state, action: PayloadAction<string>) => {
 			state.formDesc = action.payload;
 		},
+		addCopiedCard: (state, action: PayloadAction<number>) => {
+			const currentCardId = action.payload;
+			const currentCardIndex = state.cards.findIndex((cardId) => cardId === currentCardId);
+			const newCardId = currentCardId + 1;
+
+			if (currentCardIndex >= 0) {
+				state.cards.splice(currentCardIndex + 1, 0, newCardId);
+			}
+			for (let i = currentCardIndex + 2; i < state.cards.length; i++) {
+				state.cards[i] = state.cards[i - 1] + 1;
+			}
+		},
 	},
 });
 
-export const { addCard, removeCard, updateFormTitle, updateFormDesc } = formSlice.actions;
+export const { addCard, removeCard, updateFormTitle, updateFormDesc, addCopiedCard } = formSlice.actions;
 export default formSlice.reducer;

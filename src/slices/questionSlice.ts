@@ -65,6 +65,13 @@ export const questionSlice = createSlice({
 				state.cards[cardId].isRequired = isRequired;
 			}
 		},
+		copyCardState: (state, action: PayloadAction<{ originCardId: number; newCardId: number }>) => {
+			const { originCardId, newCardId } = action.payload;
+			const originCard = state.cards[originCardId];
+			if (originCard) {
+				state.cards[newCardId] = { ...originCard };
+			}
+		},
 	},
 });
 
@@ -77,5 +84,6 @@ export const {
 	addCardState,
 	removeCardState,
 	toggleRequired,
+	copyCardState,
 } = questionSlice.actions;
 export default questionSlice.reducer;
