@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
 type OptionTypeProps = {
-	type: 'radio' | 'check' | 'dropdown';
+	type: string;
+	value: string;
 };
-export default function OptionQuestion({ type }: OptionTypeProps) {
+export default function OptionQuestion({ type, value }: OptionTypeProps) {
 	const SelectedOption = () => {
 		switch (type) {
-			case 'radio':
-				return <Radio type="radio" />;
-			case 'check':
-				return <Checkbox type="checkbox" />;
-			case 'dropdown':
-				return <DropDown type="text" />;
+			case 'RadioType':
+				return <Radio type="text" value={value} />;
+			case 'CheckboxType':
+				return <Checkbox type="text" value={value} />;
+			case 'DndType':
+				return <DropDown type="text" value={value} />;
 			default:
 				return;
 		}

@@ -1,17 +1,22 @@
 import { useState } from 'react';
 import { FormControl, SelectChangeEvent } from '@mui/material';
 import { TypeSelect, TypeItem } from './styles';
+import { useDispatch } from 'react-redux';
+import { setQuestionType } from '../../slices/questionSlice';
 
 export default function SelectType() {
-	const [questionType, setQuestionType] = useState('RadioType');
+	const dispatch = useDispatch();
+	const [selectedType, setSelectedType] = useState('RadioType');
 
 	const handleTypeChange = (event: SelectChangeEvent) => {
-		setQuestionType(event.target.value);
+		setSelectedType(event.target.value);
+		const newType = event.target.value;
+		dispatch(setQuestionType(newType));
 	};
 
 	return (
 		<FormControl sx={{ m: 1, minWidth: 180 }}>
-			<TypeSelect id="select-type" value={questionType} onChange={handleTypeChange}>
+			<TypeSelect id="select-type" value={selectedType} onChange={handleTypeChange}>
 				<TypeItem value="ShortType">단답형</TypeItem>
 				<TypeItem value="LongType">장문형</TypeItem>
 				<TypeItem value="RadioType" defaultChecked>
