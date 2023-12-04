@@ -54,9 +54,19 @@ export const questionSlice = createSlice({
 				cardTitle: '질문',
 			};
 		},
+		removeCardState: (state, action: PayloadAction<number>) => {
+			delete state.cards[action.payload];
+		},
 	},
 });
 
-export const { updateCardTitle, setQuestionType, addOption, removeOption, updateOption, addCardState } =
-	questionSlice.actions;
+export const {
+	updateCardTitle,
+	setQuestionType,
+	addOption,
+	removeOption,
+	updateOption,
+	addCardState,
+	removeCardState,
+} = questionSlice.actions;
 export default questionSlice.reducer;

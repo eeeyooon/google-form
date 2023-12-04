@@ -17,7 +17,7 @@ export default function Form() {
 	console.log(cardsData);
 
 	const handleAddCard = () => {
-		const newCardId = cards.length + 1;
+		const newCardId = Math.max(...cards, 0) + 1;
 		dispatch(addCard(newCardId));
 		dispatch(addCardState(newCardId));
 	};

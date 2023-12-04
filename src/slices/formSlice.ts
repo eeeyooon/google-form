@@ -16,8 +16,11 @@ export const formSlice = createSlice({
 			const newCardId = action.payload;
 			state.cards.push(newCardId);
 		},
+		removeCard: (state, action: PayloadAction<number>) => {
+			state.cards = state.cards.filter((cardId) => cardId !== action.payload);
+		},
 	},
 });
 
-export const { addCard } = formSlice.actions;
+export const { addCard, removeCard } = formSlice.actions;
 export default formSlice.reducer;

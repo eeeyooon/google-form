@@ -19,9 +19,8 @@ export default function Card({ id }: CardProps) {
 		<div>로딩중 ...</div>;
 	}
 
-	const { questionType, options, cardTitle } = cardState;
+	const { questionType, options } = cardState;
 
-	// console.log(cardTitle);
 	// console.log(options);
 	// console.log(textQuestion);
 
@@ -42,8 +41,7 @@ export default function Card({ id }: CardProps) {
 			{questionType !== 'ShortType' && questionType !== 'LongType' ? (
 				<button onClick={() => dispatch(addOption(id))}>질문추가</button>
 			) : null}
-
-			<CardFooter />
+			<CardFooter cardId={id} />
 		</CardWrapper>
 	);
 }
