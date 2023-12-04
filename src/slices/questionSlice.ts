@@ -6,6 +6,7 @@ type QuestionState = {
 			questionType: string;
 			options: string[];
 			cardTitle: string;
+			isRequired: boolean;
 		};
 	};
 };
@@ -15,8 +16,8 @@ const initialState: QuestionState = {
 		1: {
 			questionType: 'RadioType',
 			options: ['옵션1'],
-
 			cardTitle: '질문',
+			isRequired: false,
 		},
 	},
 };
@@ -52,10 +53,17 @@ export const questionSlice = createSlice({
 				questionType: 'RadioType',
 				options: ['옵션1'],
 				cardTitle: '질문',
+				isRequired: false,
 			};
 		},
 		removeCardState: (state, action: PayloadAction<number>) => {
 			delete state.cards[action.payload];
+		},
+		toggleRequired: (state, action: PayloadAction<{ cardId: number; isRequired: boolean }>) => {
+			const { cardId, isRequired } = action.payload;
+			if (state.cards[cardId]) {
+				state.cards[cardId].isRequired = isRequired;
+			}
 		},
 	},
 });
@@ -68,5 +76,6 @@ export const {
 	updateOption,
 	addCardState,
 	removeCardState,
+	toggleRequired,
 } = questionSlice.actions;
 export default questionSlice.reducer;
