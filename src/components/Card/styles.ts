@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 export const CardWrapper = styled.div`
 	width: 768px;
 	min-height: 138px;
@@ -7,4 +6,23 @@ export const CardWrapper = styled.div`
 	margin-top: 12px;
 	background-color: ${({ theme }) => theme.color.white};
 	padding-top: 12px;
+`;
+
+export const AddOption = styled.button`
+	color: ${({ theme }) => theme.color.gray};
+	border: none;
+	margin: 5px;
+	height: 30px;
+	margin-left: 10px;
+	margin-top: 15px;
+	border-bottom: 1px solid ${({ theme }) => theme.color.white};
+	&:hover {
+		border-bottom: 1px solid ${({ theme }) => theme.color.mediumgray};
+	}
+`;
+
+export const AddOptionBox = styled.div`
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
 `;

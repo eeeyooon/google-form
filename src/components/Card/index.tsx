@@ -2,10 +2,11 @@ import { RootState } from '../../store';
 import CardFooter from '../CardFooter';
 import CardHeader from '../CardHeader';
 import { OptionQuestion, TextQuestion } from '../Question';
-import { CardWrapper } from './styles';
+import { CardWrapper, AddOption, AddOptionBox } from './styles';
 import { useSelector } from 'react-redux';
-import { addOption, removeOption } from '../../slices/questionSlice';
+import { addOption } from '../../slices/questionSlice';
 import { useDispatch } from 'react-redux';
+import { CheckboxIcon, DndIndex, RadioIcon } from '../Question/OptionQuestion/styles';
 
 type CardProps = {
 	id: number;
@@ -23,15 +24,21 @@ export default function Card({ id }: CardProps) {
 				<TextQuestion type={questionType} />
 			) : (
 				options.map((option, index) => (
-					<div key={index}>
-						<OptionQuestion index={index} type={questionType} value={option} cardId={id} />
-						<button onClick={() => dispatch(removeOption({ cardId: id, optionIndex: index }))}>삭제</button>
-					</div>
+					<OptionQuestion key={index} index={index} type={questionType} value={option} cardId={id} />
 				))
 			)}
 
 			{questionType !== 'ShortType' && questionType !== 'LongType' ? (
-				<button onClick={() => dispatch(addOption(id))}>질문추가</button>
+				<AddOptionBox>
+					{questionType === 'RadioType' ? (
+						<RadioIcon />
+					) : questionType === 'CheckboxType' ? (
+						<CheckboxIcon />
+					) : (
+						<DndIndex>{options.length + 1}</DndIndex>
+					)}
+					<AddOption onClick={() => dispatch(addOption(id))}>옵션 추가</AddOption>
+				</AddOptionBox>
 			) : null}
 			<CardFooter cardId={id} />
 		</CardWrapper>
