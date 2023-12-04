@@ -5,7 +5,6 @@ type QuestionState = {
 		[cardId: number]: {
 			questionType: string;
 			options: string[];
-			textQuestion: string;
 			cardTitle: string;
 		};
 	};
@@ -16,7 +15,7 @@ const initialState: QuestionState = {
 		1: {
 			questionType: 'RadioType',
 			options: ['옵션1'],
-			textQuestion: '',
+
 			cardTitle: '질문',
 		},
 	},
@@ -47,29 +46,17 @@ export const questionSlice = createSlice({
 			const { cardId, index, value } = action.payload;
 			state.cards[cardId].options[index] = value;
 		},
-		updateTextQuestion: (state, action: PayloadAction<{ cardId: number; text: string }>) => {
-			const { cardId, text } = action.payload;
-			state.cards[cardId].textQuestion = text;
-		},
 		addCardState: (state, action: PayloadAction<number>) => {
 			const newCardId = action.payload;
 			state.cards[newCardId] = {
 				questionType: 'RadioType',
 				options: ['옵션1'],
-				textQuestion: '',
 				cardTitle: '질문',
 			};
 		},
 	},
 });
 
-export const {
-	updateCardTitle,
-	setQuestionType,
-	addOption,
-	removeOption,
-	updateOption,
-	updateTextQuestion,
-	addCardState,
-} = questionSlice.actions;
+export const { updateCardTitle, setQuestionType, addOption, removeOption, updateOption, addCardState } =
+	questionSlice.actions;
 export default questionSlice.reducer;

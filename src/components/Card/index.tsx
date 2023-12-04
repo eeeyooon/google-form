@@ -19,7 +19,7 @@ export default function Card({ id }: CardProps) {
 		<div>로딩중 ...</div>;
 	}
 
-	const { questionType, options, textQuestion, cardTitle } = cardState;
+	const { questionType, options, cardTitle } = cardState;
 
 	// console.log(cardTitle);
 	// console.log(options);
@@ -29,7 +29,7 @@ export default function Card({ id }: CardProps) {
 		<CardWrapper>
 			<CardHeader cardId={id} />
 			{questionType === 'ShortType' || questionType === 'LongType' ? (
-				<TextQuestion type={questionType} cardId={id} />
+				<TextQuestion type={questionType} />
 			) : (
 				options.map((option, index) => (
 					<div key={index}>
