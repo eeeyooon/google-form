@@ -8,10 +8,11 @@ import { addOption, removeOption } from '../../slices/questionSlice';
 import { useDispatch } from 'react-redux';
 
 export default function Card() {
-	const { questionType, options } = useSelector((state: RootState) => state.question);
+	const { questionType, options, textQuestion } = useSelector((state: RootState) => state.question);
 	const dispatch = useDispatch();
 
-	console.log(questionType);
+	// console.log(options);
+	// console.log(textQuestion);
 
 	return (
 		<CardWrapper>
@@ -21,7 +22,7 @@ export default function Card() {
 			) : (
 				options.map((option, index) => (
 					<div key={index}>
-						<OptionQuestion key={index} type={questionType} value={option} />
+						<OptionQuestion index={index} key={index} type={questionType} value={option} />
 						<button onClick={() => dispatch(removeOption(index))}>삭제</button>
 					</div>
 				))

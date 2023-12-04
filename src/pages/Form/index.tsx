@@ -7,8 +7,8 @@ export default function Form() {
 	return (
 		<FormWrapper>
 			<TitleSection />
-			<SideMenu />
 			<Card />
+			<SideMenu />
 		</FormWrapper>
 	);
 }
