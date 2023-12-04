@@ -4,18 +4,23 @@ type QuestionState = {
 	questionType: string;
 	options: string[];
 	textQuestion: string;
+	cardTitle: string;
 };
 
 const initialState: QuestionState = {
 	questionType: 'RadioType',
 	options: ['옵션1'],
 	textQuestion: '',
+	cardTitle: '질문',
 };
 
 export const questionSlice = createSlice({
 	name: 'question',
 	initialState,
 	reducers: {
+		updateCardTitle: (state, action: PayloadAction<string>) => {
+			state.cardTitle = action.payload;
+		},
 		setQuestionType: (state, action: PayloadAction<string>) => {
 			state.questionType = action.payload;
 			state.options = ['옵션1'];
@@ -37,5 +42,6 @@ export const questionSlice = createSlice({
 	},
 });
 
-export const { setQuestionType, addOption, removeOption, updateOption, updateTextQuestion } = questionSlice.actions;
+export const { updateCardTitle, setQuestionType, addOption, removeOption, updateOption, updateTextQuestion } =
+	questionSlice.actions;
 export default questionSlice.reducer;

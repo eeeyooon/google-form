@@ -8,9 +8,10 @@ import { addOption, removeOption } from '../../slices/questionSlice';
 import { useDispatch } from 'react-redux';
 
 export default function Card() {
-	const { questionType, options, textQuestion } = useSelector((state: RootState) => state.question);
+	const { questionType, options, textQuestion, cardTitle } = useSelector((state: RootState) => state.question);
 	const dispatch = useDispatch();
 
+	// console.log(cardTitle);
 	// console.log(options);
 	// console.log(textQuestion);
 
