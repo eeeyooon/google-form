@@ -19,8 +19,20 @@ export default function TitleSection() {
 		<TitleSectionWrapper>
 			<HighlightBar />
 			<InputWrapper>
-				<InputTitle type="text" placeholder="설문지 제목" value={formTitle} onChange={handleTitleChange} />
-				<InputDesc type="text" placeholder="설문지 설명" value={formDesc} onChange={handleDescChange} />
+				<InputTitle
+					type="text"
+					placeholder="설문지 제목"
+					value={formTitle}
+					onChange={handleTitleChange}
+					variant="standard"
+				/>
+				<InputDesc
+					type="text"
+					placeholder="설문지 설명"
+					value={formDesc}
+					onChange={handleDescChange}
+					variant="standard"
+				/>
 			</InputWrapper>
 		</TitleSectionWrapper>
 	);

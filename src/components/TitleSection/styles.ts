@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import TextField from '@mui/material/TextField';
 
 export const TitleSectionWrapper = styled.div`
 	width: 768px;
@@ -14,36 +15,43 @@ export const TitleSectionWrapper = styled.div`
 export const InputWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-
-	input {
-		margin-left: 24px;
-		margin-right: 24px;
-		border: none;
-		border-bottom: 1px solid ${({ theme }) => theme.color.lightgray};
-		outline: none;
-	}
 `;
 
-export const InputTitle = styled.input`
+export const InputTitle = styled(TextField)`
 	height: 65px;
-	display: flex;
-	align-items: center;
-	font-size: 2rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	font-size: 32px;
+	padding-top: 12px;
 
 	&::placeholder {
 		color: ${({ theme }) => theme.color.black};
 	}
+
+	div {
+		font-size: 2rem;
+	}
+
+	::after {
+		border-bottom: ${({ theme }) => `2px solid ${theme.color.primary}`};
+	}
 `;
 
-export const InputDesc = styled.input`
+export const InputDesc = styled(TextField)`
 	height: 24px;
 	font-size: 0.875rem;
-
-	display: flex;
-	align-items: center;
+	margin-left: 20px;
+	margin-right: 20px;
 	color: ${({ theme }) => theme.color.gray};
-
 	margin-top: 8px;
+
+	div {
+		font-size: 12px;
+	}
+
+	::after {
+		border-bottom: ${({ theme }) => `2px solid ${theme.color.primary}`};
+	}
 `;
 
 export const HighlightBar = styled.div`
