@@ -3,7 +3,7 @@ import { Switch } from '@mui/material';
 
 export const CardFooterWrapper = styled.div`
 	border-top: 1px solid ${({ theme }) => theme.color.lightgray};
-	margin: 10px 24px;
+	margin: 20px 20px 20px 10px;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;

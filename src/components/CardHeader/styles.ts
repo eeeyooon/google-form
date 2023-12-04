@@ -11,7 +11,7 @@ export const InputCardTitle = styled(TextField)`
 	height: 55px;
 	width: 500px;
 	font-size: 1rem;
-	margin-left: 10px;
+	margin-left: 20px;
 
 	::after {
 		border-bottom: ${({ theme }) => `2px solid ${theme.color.primary}`};

@@ -14,15 +14,7 @@ type CardProps = {
 export default function Card({ id }: CardProps) {
 	const cardState = useSelector((state: RootState) => state.question.cards[id]);
 	const dispatch = useDispatch();
-
-	if (!cardState) {
-		<div>로딩중 ...</div>;
-	}
-
 	const { questionType, options } = cardState;
-
-	// console.log(options);
-	// console.log(textQuestion);
 
 	return (
 		<CardWrapper>
