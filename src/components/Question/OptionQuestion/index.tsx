@@ -3,16 +3,18 @@ import styled from 'styled-components';
 import { updateOption } from '../../../slices/questionSlice';
 
 type OptionTypeProps = {
+	cardId: number;
 	type: string;
 	value: string;
 	index: number;
 };
-export default function OptionQuestion({ type, value, index }: OptionTypeProps) {
+export default function OptionQuestion({ cardId, type, value, index }: OptionTypeProps) {
 	const dispatch = useDispatch();
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(updateOption({ index, value: e.target.value }));
+		dispatch(updateOption({ cardId, index, value: e.target.value }));
 	};
+
 	const SelectedOption = () => {
 		switch (type) {
 			case 'RadioType':

@@ -7,9 +7,19 @@ import { useSelector } from 'react-redux';
 import { addOption, removeOption } from '../../slices/questionSlice';
 import { useDispatch } from 'react-redux';
 
-export default function Card() {
-	const { questionType, options, textQuestion, cardTitle } = useSelector((state: RootState) => state.question);
+type CardProps = {
+	id: number;
+};
+
+export default function Card({ id }: CardProps) {
+	const cardState = useSelector((state: RootState) => state.question.cards[id]);
 	const dispatch = useDispatch();
+
+	if (!cardState) {
+		<div>로딩중 ...</div>;
+	}
+
+	const { questionType, options, textQuestion, cardTitle } = cardState;
 
 	// console.log(cardTitle);
 	// console.log(options);
@@ -17,23 +27,21 @@ export default function Card() {
 
 	return (
 		<CardWrapper>
-			<CardHeader />
+			<CardHeader cardId={id} />
 			{questionType === 'ShortType' || questionType === 'LongType' ? (
-				<TextQuestion type={questionType} />
+				<TextQuestion type={questionType} cardId={id} />
 			) : (
 				options.map((option, index) => (
 					<div key={index}>
-						<OptionQuestion index={index} key={index} type={questionType} value={option} />
-						<button onClick={() => dispatch(removeOption(index))}>삭제</button>
+						<OptionQuestion index={index} type={questionType} value={option} cardId={id} />
+						<button onClick={() => dispatch(removeOption({ cardId: id, optionIndex: index }))}>삭제</button>
 					</div>
 				))
 			)}
 
 			{questionType !== 'ShortType' && questionType !== 'LongType' ? (
-				<button onClick={() => dispatch(addOption())}>질문추가</button>
-			) : (
-				<></>
-			)}
+				<button onClick={() => dispatch(addOption(id))}>질문추가</button>
+			) : null}
 
 			<CardFooter />
 		</CardWrapper>

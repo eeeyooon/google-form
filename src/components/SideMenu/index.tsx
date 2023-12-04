@@ -1,13 +1,16 @@
 import { IoAddCircleOutline, IoEyeOutline } from 'react-icons/io5';
 import { SideMenuWrapper } from './styles';
 
-export default function SideMenu() {
+type SideMenuProps = {
+	addCard: () => void;
+};
+export default function SideMenu({ addCard }: SideMenuProps) {
 	return (
 		<SideMenuWrapper>
-			<button>
+			<button className="PreviewForm">
 				<IoEyeOutline />
 			</button>
-			<button>
+			<button className="AddNewCard" onClick={addCard}>
 				<IoAddCircleOutline />
 			</button>
 		</SideMenuWrapper>

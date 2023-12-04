@@ -5,12 +5,16 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { updateCardTitle } from '../../slices/questionSlice';
 
-export default function CardHeader() {
+type CardHeaderProps = {
+	cardId: number;
+};
+
+export default function CardHeader({ cardId }: CardHeaderProps) {
 	const dispatch = useDispatch();
-	const cardTitle = useSelector((state: RootState) => state.question.cardTitle);
+	const cardTitle = useSelector((state: RootState) => state.question.cards[cardId].cardTitle);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(updateCardTitle(e.target.value));
+		dispatch(updateCardTitle({ cardId, title: e.target.value }));
 	};
 
 	return (
@@ -23,7 +27,7 @@ export default function CardHeader() {
 				value={cardTitle}
 				onChange={handleInputChange}
 			/>
-			<SelectType />
+			<SelectType cardId={cardId} />
 		</CardHeaderWrapper>
 	);
 }

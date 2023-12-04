@@ -4,14 +4,16 @@ import { TypeSelect, TypeItem } from './styles';
 import { useDispatch } from 'react-redux';
 import { setQuestionType } from '../../slices/questionSlice';
 
-export default function SelectType() {
+type SelectTypeProps = {
+	cardId: number;
+};
+export default function SelectType({ cardId }: SelectTypeProps) {
 	const dispatch = useDispatch();
 	const [selectedType, setSelectedType] = useState('RadioType');
 
 	const handleTypeChange = (event: SelectChangeEvent) => {
 		setSelectedType(event.target.value);
-		const newType = event.target.value;
-		dispatch(setQuestionType(newType));
+		dispatch(setQuestionType({ cardId, questionType: event.target.value }));
 	};
 
 	return (

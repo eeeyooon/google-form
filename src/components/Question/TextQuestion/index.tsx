@@ -6,13 +6,15 @@ import { updateTextQuestion } from '../../../slices/questionSlice';
 
 type TextQuestionProps = {
 	type: string;
+	cardId: number;
 };
-export default function TextQuestion({ type }: TextQuestionProps) {
+export default function TextQuestion({ cardId, type }: TextQuestionProps) {
 	const dispatch = useDispatch();
-	const textQuestion = useSelector((state: RootState) => state.question.textQuestion);
+
+	const textQuestion = useSelector((state: RootState) => state.question.cards[cardId].textQuestion);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(updateTextQuestion(e.target.value));
+		dispatch(updateTextQuestion({ cardId, text: e.target.value }));
 	};
 
 	return (
