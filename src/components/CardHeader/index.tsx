@@ -19,14 +19,7 @@ export default function CardHeader({ cardId }: CardHeaderProps) {
 
 	return (
 		<CardHeaderWrapper>
-			<InputCardTitle
-				id="question-input"
-				variant="filled"
-				placeholder="질문"
-				multiline
-				value={cardTitle}
-				onChange={handleInputChange}
-			/>
+			<InputCardTitle variant="filled" placeholder="질문" multiline value={cardTitle} onChange={handleInputChange} />
 			<SelectType cardId={cardId} />
 		</CardHeaderWrapper>
 	);
