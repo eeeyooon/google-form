@@ -6,14 +6,17 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { addCard, moveCard } from '../../slices/formSlice';
-import { addCardState, updateFocus } from '../../slices/questionSlice';
+import { addCardState, reorderCards, updateFocus } from '../../slices/questionSlice';
 import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
+import { useEffect } from 'react';
 
 export default function Form() {
 	const dispatch = useDispatch();
 	const cards = useSelector((state: RootState) => state.form.cards);
 	const cardsData = useSelector((state: RootState) => state.question.cards);
+
 	console.log(cardsData);
+	console.log(cards);
 
 	const handleAddCard = () => {
 		const newCardId = Math.max(...cards, 0) + 1;
@@ -21,6 +24,10 @@ export default function Form() {
 		dispatch(addCardState(newCardId));
 		dispatch(updateFocus(newCardId));
 	};
+
+	useEffect(() => {
+		dispatch(reorderCards(cards));
+	}, [cards, dispatch]);
 
 	const onDragEnd = (result: DropResult) => {
 		if (!result.destination) return;
