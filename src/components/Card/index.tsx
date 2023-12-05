@@ -23,6 +23,7 @@ export default function Card({ cardId, dragHandleProps }: CardProps) {
 	const { questionType, options } = cardState;
 
 	const isFocused = useSelector((state: RootState) => state.question.cards[cardId].isFocused);
+	const isRequired = useSelector((state: RootState) => state.question.cards[cardId].isRequired);
 
 	const handleFocus = () => {
 		dispatch(updateFocus(cardId));
@@ -30,18 +31,18 @@ export default function Card({ cardId, dragHandleProps }: CardProps) {
 
 	return (
 		<CardWrapper onClick={handleFocus}>
-			<DragButton className="DragIcon" {...dragHandleProps}>
+			<DragButton className="DragIcon" {...dragHandleProps} $isFocused={isFocused}>
 				<MdDragIndicator />
 			</DragButton>
 			{isFocused && <HighlightBar />}
-			<CardHeader cardId={cardId} isFocused={isFocused} />
+			<CardHeader cardId={cardId} isFocused={isFocused} isRequired={isRequired} />
 			<QuestionsWrapper>
 				{questionType === 'ShortType' || questionType === 'LongType' ? (
 					<TextQuestion type={questionType} />
 				) : (
 					options.map((option, index) => (
 						<OptionQuestion
-							key={index}
+							key={option.id}
 							index={index}
 							type={questionType}
 							option={option}

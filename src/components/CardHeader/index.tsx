@@ -8,9 +8,10 @@ import { updateCardTitle } from '../../slices/questionSlice';
 type CardHeaderProps = {
 	cardId: number;
 	isFocused: boolean;
+	isRequired: boolean;
 };
 
-export default function CardHeader({ cardId, isFocused }: CardHeaderProps) {
+export default function CardHeader({ cardId, isFocused, isRequired }: CardHeaderProps) {
 	const dispatch = useDispatch();
 	const cardTitle = useSelector((state: RootState) => state.question.cards[cardId].cardTitle);
 
@@ -27,6 +28,7 @@ export default function CardHeader({ cardId, isFocused }: CardHeaderProps) {
 				value={cardTitle}
 				onChange={handleInputChange}
 				$isFocused={isFocused}
+				$isRequired={isRequired}
 			/>
 			{isFocused && <SelectType cardId={cardId} />}
 		</CardHeaderWrapper>

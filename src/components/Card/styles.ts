@@ -33,7 +33,19 @@ export const AddOptionBox = styled.div`
 	align-items: center;
 `;
 
-export const DragButton = styled.div`
+export const DragButton = styled.div<{ $isFocused: boolean }>`
 	cursor: move;
-	margin-left: auto;
+	display: flex;
+	justify-content: center;
+	color: ${({ $isFocused, theme }) => {
+		return $isFocused ? theme.color.mediumgray : theme.color.white;
+	}};
+
+	&:hover {
+		color: ${({ theme }) => theme.color.mediumgray};
+	}
+
+	svg {
+		transform: rotate(90deg);
+	}
 `;
