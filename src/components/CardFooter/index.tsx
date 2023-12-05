@@ -24,10 +24,12 @@ export default function CardFooter({ cardId }: CardFooterProps) {
 		dispatch(removeCardState(cardId));
 		dispatch(updateFocus(newFocusCardId));
 	};
-	const handleCopyCard = () => {
+	const handleCopyCard = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.stopPropagation();
 		dispatch(addCopiedCard(cardId));
 		const newCardId = Math.max(...cards) + 1;
 		dispatch(copyCardState({ originCardId: cardId, newCardId }));
+		dispatch(updateFocus(newCardId));
 	};
 
 	const handleSwitchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
