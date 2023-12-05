@@ -46,11 +46,11 @@ export const InputDesc = styled(TextField)<{ $isFocused: boolean }>`
 	font-size: 0.875rem;
 	margin-left: 20px;
 	margin-right: 20px;
-	color: ${({ theme }) => theme.color.gray};
 	margin-top: 8px;
 
 	div {
-		font-size: 12px;
+		font-size: 0.8125rem;
+		color: ${({ theme }) => theme.color.gray};
 	}
 
 	::before {

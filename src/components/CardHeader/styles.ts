@@ -7,11 +7,21 @@ export const CardHeaderWrapper = styled.div`
 	align-items: center;
 `;
 
-export const InputCardTitle = styled(TextField)`
+export const InputCardTitle = styled(TextField)<{ $isFocused: boolean }>`
 	height: 55px;
 	width: 500px;
-	font-size: 1rem;
 	margin-left: 20px;
+
+	div {
+		background-color: ${({ $isFocused, theme }) => {
+			return $isFocused ? theme.color.inputgray : 'transparent';
+		}};
+	}
+	::before {
+		border-bottom: ${({ $isFocused, theme }) => {
+			return $isFocused ? `1px solid ${theme.color.white}` : 'none';
+		}};
+	}
 
 	::after {
 		border-bottom: ${({ theme }) => `2px solid ${theme.color.primary}`};

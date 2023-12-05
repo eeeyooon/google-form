@@ -2,14 +2,12 @@ import { useDispatch } from 'react-redux';
 import { removeOption, updateOption } from '../../../slices/questionSlice';
 import {
 	OptionQuestionWrapper,
-	Checkbox,
-	Radio,
-	DropDown,
 	DeleteOption,
 	OptionInputBox,
 	CheckboxIcon,
 	RadioIcon,
 	DndIndex,
+	OptionBox,
 } from './styles';
 import { MdOutlineClose } from 'react-icons/md';
 
@@ -18,8 +16,9 @@ type OptionTypeProps = {
 	type: string;
 	value: string;
 	index: number;
+	isFocused: boolean;
 };
-export default function OptionQuestion({ cardId, type, value, index }: OptionTypeProps) {
+export default function OptionQuestion({ cardId, type, value, index, isFocused }: OptionTypeProps) {
 	const dispatch = useDispatch();
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,11 +28,38 @@ export default function OptionQuestion({ cardId, type, value, index }: OptionTyp
 	const SelectedOption = () => {
 		switch (type) {
 			case 'RadioType':
-				return <Radio type="text" value={value} onChange={handleInputChange} variant="standard" />;
+				return (
+					<OptionBox
+						className="RadioType"
+						type="text"
+						value={value}
+						onChange={handleInputChange}
+						variant="standard"
+						$isFocused={isFocused}
+					/>
+				);
 			case 'CheckboxType':
-				return <Checkbox type="text" value={value} onChange={handleInputChange} variant="standard" />;
+				return (
+					<OptionBox
+						className="CheckboxType"
+						type="text"
+						value={value}
+						onChange={handleInputChange}
+						variant="standard"
+						$isFocused={isFocused}
+					/>
+				);
 			case 'DndType':
-				return <DropDown type="text" value={value} onChange={handleInputChange} variant="standard" />;
+				return (
+					<OptionBox
+						className="DndType"
+						type="text"
+						value={value}
+						onChange={handleInputChange}
+						variant="standard"
+						$isFocused={isFocused}
+					/>
+				);
 			default:
 				return;
 		}
@@ -46,15 +72,16 @@ export default function OptionQuestion({ cardId, type, value, index }: OptionTyp
 					<RadioIcon />
 				) : type === 'CheckboxType' ? (
 					<CheckboxIcon />
-				) : (
+				) : type === 'DndType' ? (
 					<DndIndex>{index + 1}</DndIndex>
-				)}
+				) : null}
 				{SelectedOption()}
 			</OptionInputBox>
-
-			<DeleteOption onClick={() => dispatch(removeOption({ cardId: cardId, optionIndex: index }))}>
-				<MdOutlineClose />
-			</DeleteOption>
+			{isFocused && (
+				<DeleteOption onClick={() => dispatch(removeOption({ cardId: cardId, optionIndex: index }))}>
+					<MdOutlineClose />
+				</DeleteOption>
+			)}
 		</OptionQuestionWrapper>
 	);
 }

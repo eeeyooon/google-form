@@ -53,20 +53,13 @@ export const DndIndex = styled.div`
 	color: ${({ theme }) => theme.color.gray};
 `;
 
-export const Checkbox = styled(TextField)`
+export const OptionBox = styled(TextField)<{ $isFocused: boolean }>`
 	margin-left: 10px;
-	::after {
-		border-bottom: ${({ theme }) => `2px solid ${theme.color.primary}`};
+	::before {
+		border-bottom: ${({ $isFocused, theme }) => {
+			return $isFocused ? theme.color.gray : 'none';
+		}};
 	}
-`;
-export const Radio = styled(TextField)`
-	margin-left: 10px;
-	::after {
-		border-bottom: ${({ theme }) => `2px solid ${theme.color.primary}`};
-	}
-`;
-export const DropDown = styled(TextField)`
-	margin-left: 10px;
 	::after {
 		border-bottom: ${({ theme }) => `2px solid ${theme.color.primary}`};
 	}

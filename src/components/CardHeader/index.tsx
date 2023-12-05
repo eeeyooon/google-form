@@ -7,9 +7,10 @@ import { updateCardTitle } from '../../slices/questionSlice';
 
 type CardHeaderProps = {
 	cardId: number;
+	isFocused: boolean;
 };
 
-export default function CardHeader({ cardId }: CardHeaderProps) {
+export default function CardHeader({ cardId, isFocused }: CardHeaderProps) {
 	const dispatch = useDispatch();
 	const cardTitle = useSelector((state: RootState) => state.question.cards[cardId].cardTitle);
 
@@ -19,8 +20,15 @@ export default function CardHeader({ cardId }: CardHeaderProps) {
 
 	return (
 		<CardHeaderWrapper>
-			<InputCardTitle variant="filled" placeholder="질문" multiline value={cardTitle} onChange={handleInputChange} />
-			<SelectType cardId={cardId} />
+			<InputCardTitle
+				variant="filled"
+				placeholder="질문"
+				multiline
+				value={cardTitle}
+				onChange={handleInputChange}
+				$isFocused={isFocused}
+			/>
+			{isFocused && <SelectType cardId={cardId} />}
 		</CardHeaderWrapper>
 	);
 }
