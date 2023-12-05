@@ -15,7 +15,8 @@ export default function CardFooter({ cardId }: CardFooterProps) {
 	const cards = useSelector((state: RootState) => state.form.cards);
 	const isRequired = useSelector((state: RootState) => state.question.cards[cardId].isRequired);
 
-	const handleDeleteCard = () => {
+	const handleDeleteCard = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.stopPropagation();
 		const cardIndex = cards.indexOf(cardId);
 		const newFocusCardId = cardIndex > 0 ? cards[cardIndex - 1] : -1;
 
@@ -23,7 +24,6 @@ export default function CardFooter({ cardId }: CardFooterProps) {
 		dispatch(removeCardState(cardId));
 		dispatch(updateFocus(newFocusCardId));
 	};
-
 	const handleCopyCard = () => {
 		dispatch(addCopiedCard(cardId));
 		const newCardId = Math.max(...cards) + 1;
