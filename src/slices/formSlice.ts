@@ -41,8 +41,16 @@ export const formSlice = createSlice({
 				state.cards[i] = state.cards[i - 1] + 1;
 			}
 		},
+		moveCard: (state, action: PayloadAction<{ sourceIndex: number; destinationIndex: number }>) => {
+			const { sourceIndex, destinationIndex } = action.payload;
+			const newCards = [...state.cards];
+			const movedCard = newCards.splice(sourceIndex, 1)[0];
+			newCards.splice(destinationIndex, 0, movedCard);
+
+			state.cards = newCards;
+		},
 	},
 });
 
-export const { addCard, removeCard, updateFormTitle, updateFormDesc, addCopiedCard } = formSlice.actions;
+export const { addCard, removeCard, updateFormTitle, updateFormDesc, addCopiedCard, moveCard } = formSlice.actions;
 export default formSlice.reducer;

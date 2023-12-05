@@ -5,8 +5,9 @@ import Card from '../../components/Card';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { addCard } from '../../slices/formSlice';
+import { addCard, moveCard } from '../../slices/formSlice';
 import { addCardState, updateFocus } from '../../slices/questionSlice';
+import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
 
 export default function Form() {
 	const dispatch = useDispatch();
@@ -21,12 +22,37 @@ export default function Form() {
 		dispatch(updateFocus(newCardId));
 	};
 
+	const onDragEnd = (result: DropResult) => {
+		if (!result.destination) return;
+		dispatch(
+			moveCard({
+				sourceIndex: result.source.index,
+				destinationIndex: result.destination.index,
+			}),
+		);
+	};
+
 	return (
 		<FormWrapper>
 			<TitleSection />
-			{cards.map((cardId) => (
-				<Card key={cardId} cardId={cardId} />
-			))}
+			<DragDropContext onDragEnd={onDragEnd}>
+				<Droppable droppableId="droppableId" key="droppableId">
+					{(provided) => (
+						<div {...provided.droppableProps} ref={provided.innerRef}>
+							{cards.map((cardId, index) => (
+								<Draggable key={cardId} draggableId={cardId.toString()} index={index}>
+									{(provided) => (
+										<div ref={provided.innerRef} {...provided.draggableProps}>
+											<Card cardId={cardId} dragHandleProps={provided.dragHandleProps} />
+										</div>
+									)}
+								</Draggable>
+							))}
+							{provided.placeholder}
+						</div>
+					)}
+				</Droppable>
+			</DragDropContext>
 			<SideMenu addCard={handleAddCard} />
 		</FormWrapper>
 	);

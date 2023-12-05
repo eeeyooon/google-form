@@ -32,3 +32,8 @@ export const AddOptionBox = styled.div`
 	flex-flow: row nowrap;
 	align-items: center;
 `;
+
+export const DragButton = styled.div`
+	cursor: move;
+	margin-left: auto;
+`;
