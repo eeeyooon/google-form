@@ -3,5 +3,5 @@ type InputTextProps = {
 };
 
 export default function PreviewInputText({ isRequired }: InputTextProps) {
-	return <input type="text" />;
+	return <input type="text" name="previewInputText" />;
 }
