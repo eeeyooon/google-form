@@ -17,7 +17,7 @@ export const InputWrapper = styled.div`
 	flex-direction: column;
 `;
 
-export const InputTitle = styled(TextField)`
+export const InputTitle = styled(TextField)<{ $isFocused: boolean }>`
 	height: 65px;
 	margin-left: 20px;
 	margin-right: 20px;
@@ -31,13 +31,17 @@ export const InputTitle = styled(TextField)`
 	div {
 		font-size: 2rem;
 	}
-
+	::before {
+		border-bottom: ${({ theme, $isFocused }) => {
+			return $isFocused ? `1px solid ${theme.color.gray}` : 'none';
+		}};
+	}
 	::after {
 		border-bottom: ${({ theme }) => `2px solid ${theme.color.primary}`};
 	}
 `;
 
-export const InputDesc = styled(TextField)`
+export const InputDesc = styled(TextField)<{ $isFocused: boolean }>`
 	height: 24px;
 	font-size: 0.875rem;
 	margin-left: 20px;
@@ -49,6 +53,11 @@ export const InputDesc = styled(TextField)`
 		font-size: 12px;
 	}
 
+	::before {
+		border-bottom: ${({ theme, $isFocused }) => {
+			return $isFocused ? `1px solid ${theme.color.gray}` : 'none';
+		}};
+	}
 	::after {
 		border-bottom: ${({ theme }) => `2px solid ${theme.color.primary}`};
 	}

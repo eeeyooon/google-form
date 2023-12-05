@@ -40,6 +40,7 @@ export default function TitleSection() {
 					value={formTitle}
 					onChange={handleTitleChange}
 					variant="standard"
+					$isFocused={isFocused}
 				/>
 				<InputDesc
 					type="text"
@@ -47,6 +48,7 @@ export default function TitleSection() {
 					value={formDesc}
 					onChange={handleDescChange}
 					variant="standard"
+					$isFocused={isFocused}
 				/>
 			</InputWrapper>
 		</TitleSectionWrapper>
