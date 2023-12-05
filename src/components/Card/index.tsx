@@ -4,27 +4,36 @@ import CardHeader from '../CardHeader';
 import { OptionQuestion, TextQuestion } from '../Question';
 import { CardWrapper, AddOption, AddOptionBox } from './styles';
 import { useSelector } from 'react-redux';
-import { addOption } from '../../slices/questionSlice';
+import { addOption, updateFocus } from '../../slices/questionSlice';
 import { useDispatch } from 'react-redux';
 import { CheckboxIcon, DndIndex, RadioIcon } from '../Question/OptionQuestion/styles';
+import { HighlightBar } from '../styles';
 
 type CardProps = {
-	id: number;
+	cardId: number;
 };
 
-export default function Card({ id }: CardProps) {
-	const cardState = useSelector((state: RootState) => state.question.cards[id]);
+export default function Card({ cardId }: CardProps) {
+	const cardState = useSelector((state: RootState) => state.question.cards[cardId]);
+
 	const dispatch = useDispatch();
 	const { questionType, options } = cardState;
 
+	const isFocused = useSelector((state: RootState) => state.question.cards[cardId].isFocused);
+
+	const handleFocus = () => {
+		dispatch(updateFocus(cardId));
+	};
+
 	return (
-		<CardWrapper>
-			<CardHeader cardId={id} />
+		<CardWrapper onClick={handleFocus}>
+			{isFocused && <HighlightBar />}
+			<CardHeader cardId={cardId} />
 			{questionType === 'ShortType' || questionType === 'LongType' ? (
 				<TextQuestion type={questionType} />
 			) : (
 				options.map((option, index) => (
-					<OptionQuestion key={index} index={index} type={questionType} value={option} cardId={id} />
+					<OptionQuestion key={index} index={index} type={questionType} value={option} cardId={cardId} />
 				))
 			)}
 
@@ -37,10 +46,10 @@ export default function Card({ id }: CardProps) {
 					) : (
 						<DndIndex>{options.length + 1}</DndIndex>
 					)}
-					<AddOption onClick={() => dispatch(addOption(id))}>옵션 추가</AddOption>
+					<AddOption onClick={() => dispatch(addOption(cardId))}>옵션 추가</AddOption>
 				</AddOptionBox>
 			) : null}
-			<CardFooter cardId={id} />
+			<CardFooter cardId={cardId} />
 		</CardWrapper>
 	);
 }

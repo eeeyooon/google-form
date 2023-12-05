@@ -3,7 +3,7 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import { CardFooterWrapper, CopyCard, DeleteCard, RequiredCard, RequiredSwitch } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCopiedCard, removeCard } from '../../slices/formSlice';
-import { copyCardState, removeCardState, toggleRequired } from '../../slices/questionSlice';
+import { copyCardState, removeCardState, toggleRequired, updateFocus } from '../../slices/questionSlice';
 import { RootState } from '../../store';
 
 type CardFooterProps = {
@@ -16,8 +16,12 @@ export default function CardFooter({ cardId }: CardFooterProps) {
 	const isRequired = useSelector((state: RootState) => state.question.cards[cardId].isRequired);
 
 	const handleDeleteCard = () => {
+		const cardIndex = cards.indexOf(cardId);
+		const newFocusCardId = cardIndex > 0 ? cards[cardIndex - 1] : -1;
+
 		dispatch(removeCard(cardId));
 		dispatch(removeCardState(cardId));
+		dispatch(updateFocus(newFocusCardId));
 	};
 
 	const handleCopyCard = () => {

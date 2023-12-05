@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { addCard } from '../../slices/formSlice';
-import { addCardState } from '../../slices/questionSlice';
+import { addCardState, updateFocus } from '../../slices/questionSlice';
 
 export default function Form() {
 	const dispatch = useDispatch();
@@ -18,13 +18,14 @@ export default function Form() {
 		const newCardId = Math.max(...cards, 0) + 1;
 		dispatch(addCard(newCardId));
 		dispatch(addCardState(newCardId));
+		dispatch(updateFocus(newCardId));
 	};
 
 	return (
 		<FormWrapper>
 			<TitleSection />
 			{cards.map((cardId) => (
-				<Card key={cardId} id={cardId} />
+				<Card key={cardId} cardId={cardId} />
 			))}
 			<SideMenu addCard={handleAddCard} />
 		</FormWrapper>

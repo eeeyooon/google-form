@@ -6,6 +6,9 @@ export const CardWrapper = styled.div`
 	margin-top: 12px;
 	background-color: ${({ theme }) => theme.color.white};
 	padding-top: 12px;
+
+	position: relative;
+	overflow: hidden;
 `;
 
 export const AddOption = styled.button`

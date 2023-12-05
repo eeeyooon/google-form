@@ -53,12 +53,3 @@ export const InputDesc = styled(TextField)`
 		border-bottom: ${({ theme }) => `2px solid ${theme.color.primary}`};
 	}
 `;
-
-export const HighlightBar = styled.div`
-	background-color: ${({ theme }) => theme.color.blue};
-	position: absolute;
-	min-height: 100%;
-	width: 6px;
-	top: 0;
-	left: 0;
-`;

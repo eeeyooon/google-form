@@ -7,6 +7,7 @@ type QuestionState = {
 			options: string[];
 			cardTitle: string;
 			isRequired: boolean;
+			isFocused: boolean;
 		};
 	};
 };
@@ -18,6 +19,7 @@ const initialState: QuestionState = {
 			options: ['옵션1'],
 			cardTitle: '질문',
 			isRequired: false,
+			isFocused: false,
 		},
 	},
 };
@@ -54,6 +56,7 @@ export const questionSlice = createSlice({
 				options: ['옵션1'],
 				cardTitle: '질문',
 				isRequired: false,
+				isFocused: true,
 			};
 		},
 		removeCardState: (state, action: PayloadAction<number>) => {
@@ -72,6 +75,18 @@ export const questionSlice = createSlice({
 				state.cards[newCardId] = { ...originCard };
 			}
 		},
+		updateFocus: (state, action: PayloadAction<number>) => {
+			if (action.payload === -1) {
+				Object.keys(state.cards).forEach((cardId) => {
+					state.cards[parseInt(cardId)].isFocused = false;
+				});
+				return;
+			}
+
+			Object.keys(state.cards).forEach((cardId) => {
+				state.cards[parseInt(cardId)].isFocused = parseInt(cardId) === action.payload;
+			});
+		},
 	},
 });
 
@@ -85,5 +100,6 @@ export const {
 	removeCardState,
 	toggleRequired,
 	copyCardState,
+	updateFocus,
 } = questionSlice.actions;
 export default questionSlice.reducer;
