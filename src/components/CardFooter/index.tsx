@@ -4,7 +4,6 @@ import { CardFooterWrapper, CopyCard, DeleteCard, RequiredCard, RequiredSwitch }
 import { useDispatch, useSelector } from 'react-redux';
 import { addCopiedCard, removeCard } from '../../slices/formSlice';
 import { copyCardState, removeCardState, toggleRequired } from '../../slices/questionSlice';
-import { useState } from 'react';
 import { RootState } from '../../store';
 
 type CardFooterProps = {
@@ -14,6 +13,7 @@ type CardFooterProps = {
 export default function CardFooter({ cardId }: CardFooterProps) {
 	const dispatch = useDispatch();
 	const cards = useSelector((state: RootState) => state.form.cards);
+	const isRequired = useSelector((state: RootState) => state.question.cards[cardId].isRequired);
 
 	const handleDeleteCard = () => {
 		dispatch(removeCard(cardId));
@@ -40,7 +40,7 @@ export default function CardFooter({ cardId }: CardFooterProps) {
 				<FaRegTrashAlt />
 			</DeleteCard>
 			<RequiredCard>
-				필수 <RequiredSwitch onChange={handleSwitchChange} />
+				필수 <RequiredSwitch checked={isRequired} onChange={handleSwitchChange} />
 			</RequiredCard>
 		</CardFooterWrapper>
 	);
