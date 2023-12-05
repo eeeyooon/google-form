@@ -10,11 +10,13 @@ export const CardHeaderWrapper = styled.div`
 export const InputCardTitle = styled(TextField)<{ $isFocused: boolean }>`
 	height: 55px;
 	width: 500px;
-	margin-left: 20px;
 
 	div {
 		background-color: ${({ $isFocused, theme }) => {
 			return $isFocused ? theme.color.inputgray : 'transparent';
+		}};
+		margin-left: ${({ $isFocused }) => {
+			return $isFocused ? '20px' : '10px';
 		}};
 	}
 	::before {
