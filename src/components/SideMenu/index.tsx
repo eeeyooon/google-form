@@ -5,9 +5,13 @@ type SideMenuProps = {
 	addCard: () => void;
 };
 export default function SideMenu({ addCard }: SideMenuProps) {
+	const MovePreview = () => {
+		window.open('/preview', '_blank');
+	};
+
 	return (
 		<SideMenuWrapper>
-			<button className="PreviewForm">
+			<button className="PreviewForm" onClick={MovePreview}>
 				<IoEyeOutline />
 			</button>
 			<button className="AddNewCard" onClick={addCard}>
