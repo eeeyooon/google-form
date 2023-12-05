@@ -10,19 +10,20 @@ import {
 	OptionBox,
 } from './styles';
 import { MdOutlineClose } from 'react-icons/md';
+import { Option } from '../../../slices/questionSlice';
 
 type OptionTypeProps = {
 	cardId: number;
 	type: string;
-	value: string;
+	option: Option;
 	index: number;
 	isFocused: boolean;
 };
-export default function OptionQuestion({ cardId, type, value, index, isFocused }: OptionTypeProps) {
+export default function OptionQuestion({ cardId, type, option, index, isFocused }: OptionTypeProps) {
 	const dispatch = useDispatch();
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(updateOption({ cardId, index, value: e.target.value }));
+		dispatch(updateOption({ cardId, optionId: option.id, value: e.target.value }));
 	};
 
 	const SelectedOption = () => {
@@ -32,7 +33,7 @@ export default function OptionQuestion({ cardId, type, value, index, isFocused }
 					<OptionBox
 						className="RadioType"
 						type="text"
-						value={value}
+						value={option.text}
 						onChange={handleInputChange}
 						variant="standard"
 						$isFocused={isFocused}
@@ -43,7 +44,7 @@ export default function OptionQuestion({ cardId, type, value, index, isFocused }
 					<OptionBox
 						className="CheckboxType"
 						type="text"
-						value={value}
+						value={option.text}
 						onChange={handleInputChange}
 						variant="standard"
 						$isFocused={isFocused}
@@ -54,7 +55,7 @@ export default function OptionQuestion({ cardId, type, value, index, isFocused }
 					<OptionBox
 						className="DndType"
 						type="text"
-						value={value}
+						value={option.text}
 						onChange={handleInputChange}
 						variant="standard"
 						$isFocused={isFocused}
@@ -78,7 +79,7 @@ export default function OptionQuestion({ cardId, type, value, index, isFocused }
 				{SelectedOption()}
 			</OptionInputBox>
 			{isFocused && (
-				<DeleteOption onClick={() => dispatch(removeOption({ cardId: cardId, optionIndex: index }))}>
+				<DeleteOption onClick={() => dispatch(removeOption({ cardId, optionId: option.id }))}>
 					<MdOutlineClose />
 				</DeleteOption>
 			)}

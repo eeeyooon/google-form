@@ -1,14 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export type Option = {
+	id: string;
+	text: string;
+};
+
+type QuestionCard = {
+	questionType: string;
+	options: Option[];
+	cardTitle: string;
+	isRequired: boolean;
+	isFocused: boolean;
+};
+
 type QuestionState = {
 	cards: {
-		[cardId: number]: {
-			questionType: string;
-			options: string[];
-			cardTitle: string;
-			isRequired: boolean;
-			isFocused: boolean;
-		};
+		[cardId: number]: QuestionCard;
 	};
 };
 
@@ -16,7 +23,7 @@ const initialState: QuestionState = {
 	cards: {
 		1: {
 			questionType: 'RadioType',
-			options: ['옵션1'],
+			options: [{ id: '1', text: '옵션1' }],
 			cardTitle: '질문',
 			isRequired: false,
 			isFocused: false,
@@ -34,26 +41,29 @@ export const questionSlice = createSlice({
 		setQuestionType: (state, action: PayloadAction<{ cardId: number; questionType: string }>) => {
 			const { cardId, questionType } = action.payload;
 			state.cards[cardId].questionType = questionType;
-			state.cards[cardId].options = ['옵션1'];
+			state.cards[cardId].options = [{ id: '1', text: '옵션1' }];
 		},
 		addOption: (state, action: PayloadAction<number>) => {
 			const cardId = action.payload;
-			const newOptionNumber = state.cards[cardId].options.length + 1;
-			state.cards[cardId].options.push(`옵션${newOptionNumber}`);
+			const newOptionId = `${state.cards[cardId].options.length + 1}`;
+			state.cards[cardId].options.push({ id: newOptionId, text: `옵션${newOptionId}` });
 		},
-		removeOption: (state, action: PayloadAction<{ cardId: number; optionIndex: number }>) => {
-			const { cardId, optionIndex } = action.payload;
-			state.cards[cardId].options.splice(optionIndex, 1);
+		removeOption: (state, action: PayloadAction<{ cardId: number; optionId: string }>) => {
+			const { cardId, optionId } = action.payload;
+			state.cards[cardId].options = state.cards[cardId].options.filter((option) => option.id !== optionId);
 		},
-		updateOption: (state, action: PayloadAction<{ cardId: number; index: number; value: string }>) => {
-			const { cardId, index, value } = action.payload;
-			state.cards[cardId].options[index] = value;
+		updateOption: (state, action: PayloadAction<{ cardId: number; optionId: string; value: string }>) => {
+			const { cardId, optionId, value } = action.payload;
+			const optionIndex = state.cards[cardId].options.findIndex((option) => option.id === optionId);
+			if (optionIndex !== -1) {
+				state.cards[cardId].options[optionIndex].text = value;
+			}
 		},
 		addCardState: (state, action: PayloadAction<number>) => {
 			const newCardId = action.payload;
 			state.cards[newCardId] = {
 				questionType: 'RadioType',
-				options: ['옵션1'],
+				options: [{ id: '1', text: '옵션1' }],
 				cardTitle: '질문',
 				isRequired: false,
 				isFocused: true,

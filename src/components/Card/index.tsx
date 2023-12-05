@@ -44,7 +44,7 @@ export default function Card({ cardId, dragHandleProps }: CardProps) {
 							key={index}
 							index={index}
 							type={questionType}
-							value={option}
+							option={option}
 							cardId={cardId}
 							isFocused={isFocused}
 						/>
