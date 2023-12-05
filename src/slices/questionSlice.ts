@@ -12,8 +12,6 @@ type QuestionState = {
 	};
 };
 
-type CardsType = QuestionState['cards'];
-
 const initialState: QuestionState = {
 	cards: {
 		1: {
@@ -88,18 +86,6 @@ export const questionSlice = createSlice({
 				state.cards[parseInt(cardId)].isFocused = parseInt(cardId) === action.payload;
 			});
 		},
-		reorderCards: (state, action: PayloadAction<number[]>) => {
-			const newOrder = action.payload;
-			const newCards: QuestionState['cards'] = {};
-			let newCardId = 1;
-
-			newOrder.forEach((cardId) => {
-				newCards[newCardId] = { ...state.cards[cardId] };
-				newCardId++;
-			});
-
-			state.cards = newCards;
-		},
 	},
 });
 
@@ -114,6 +100,5 @@ export const {
 	toggleRequired,
 	copyCardState,
 	updateFocus,
-	reorderCards,
 } = questionSlice.actions;
 export default questionSlice.reducer;
