@@ -14,7 +14,7 @@ type PreviewCardProps = {
 export default function PreviewCard({ cardId, value, onInputChange }: PreviewCardProps) {
 	const CardData = useSelector((state: RootState) => state.question.cards[cardId]);
 
-	const { questionType, options, cardTitle, isRequired } = CardData;
+	const { questionType, options, cardTitle } = CardData;
 
 	const requirdCardId = useSelector((state: RootState) => state.form.requiredCardId);
 	const requiredButNotAnswerd = cardId === requirdCardId;
