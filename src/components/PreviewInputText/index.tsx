@@ -12,7 +12,7 @@ export default function PreviewInputText({ cardId, isRequired, textType, questio
 	const dispatch = useDispatch();
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const answer = event.target.value || '';
-		dispatch(addAnswer({ cardId, answer, isRequired, question }));
+		dispatch(addAnswer({ cardId, answer: [answer], isRequired, question }));
 	};
 	return <input type="text" name="previewInputText" onChange={handleChange} />;
 }

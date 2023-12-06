@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Answer = {
 	cardId: number;
-	answer: string;
+	answer: string[];
 	isRequired: boolean;
 	question: string;
 };

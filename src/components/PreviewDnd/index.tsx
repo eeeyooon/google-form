@@ -11,7 +11,7 @@ export default function PreviewDnd({ cardId, options, isRequired, question }: Pr
 	const handleChange = (event: SelectChangeEvent) => {
 		const answer = event.target.value || '';
 		setSelectedValue(answer);
-		dispatch(addAnswer({ cardId, answer, isRequired, question }));
+		dispatch(addAnswer({ cardId, answer: [answer], isRequired, question }));
 	};
 
 	return (

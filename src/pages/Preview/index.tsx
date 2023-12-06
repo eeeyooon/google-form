@@ -25,7 +25,7 @@ export default function Preview() {
 			const currentAnswer = previewAnswers.find((a) => a.cardId === cardId);
 
 			if (question.isRequired) {
-				if (!currentAnswer || currentAnswer.answer.trim() === '') {
+				if (!currentAnswer || currentAnswer.answer.length === 0) {
 					requiredCardId = cardId;
 					break;
 				}
@@ -34,7 +34,7 @@ export default function Preview() {
 			dispatch(
 				addAnswer({
 					cardId: cardId,
-					answer: currentAnswer ? currentAnswer.answer : '',
+					answer: currentAnswer ? currentAnswer.answer : [],
 					isRequired: question.isRequired,
 					question: question.cardTitle,
 				}),
@@ -47,8 +47,8 @@ export default function Preview() {
 		}
 
 		navigate('/preview/submit');
+		console.log(previewAnswers);
 	};
-
 	return (
 		<PreviewWrapper>
 			<FormTitleSection>
