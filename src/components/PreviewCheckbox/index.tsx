@@ -16,7 +16,7 @@ export default function PreviewCheckbox({ cardId, options, value = [], onInputCh
 	return (
 		<>
 			{options.map((option) => (
-				<SelectBoxInput key={option.id}>
+				<SelectBoxInput key={`${cardId}-${option.id}`}>
 					<input
 						type="checkbox"
 						id={`${cardId}-${option.id}`}

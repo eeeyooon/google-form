@@ -15,12 +15,12 @@ export default function PreviewRadio({ cardId, options, value, onInputChange }: 
 	return (
 		<>
 			{options.map((option) => (
-				<SelectBoxInput key={option.id}>
+				<SelectBoxInput key={`${cardId}-${option.id}`}>
 					<input
 						type="radio"
 						id={`${cardId}-${option.id}`}
 						value={option.text}
-						name="radio-group"
+						name={`radio${cardId}-${option.id}`}
 						checked={value === option.text}
 						onChange={handleChange}
 					/>
