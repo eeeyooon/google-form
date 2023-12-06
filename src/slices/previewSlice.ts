@@ -19,9 +19,9 @@ export const previewSlice = createSlice({
 	initialState,
 	reducers: {
 		addAnswer: (state, action: PayloadAction<Answer>) => {
-			const existingAnswerIndex = state.answers.findIndex((answer) => answer.cardId === action.payload.cardId);
-			if (existingAnswerIndex !== -1) {
-				state.answers[existingAnswerIndex] = action.payload;
+			const currentAnswerIndex = state.answers.findIndex((answer) => answer.cardId === action.payload.cardId);
+			if (currentAnswerIndex !== -1) {
+				state.answers[currentAnswerIndex] = action.payload;
 			} else {
 				state.answers.push(action.payload);
 			}

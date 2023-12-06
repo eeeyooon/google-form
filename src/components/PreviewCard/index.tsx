@@ -14,6 +14,9 @@ export default function PreviewCard({ cardId }: PreviewCardProps) {
 
 	const { questionType, options, cardTitle, isRequired } = CardData;
 
+	const requirdCardId = useSelector((state: RootState) => state.form.requiredCardId);
+	const requiredButNotAnswerd = cardId === requirdCardId;
+
 	const PreviewCardType = () => {
 		switch (questionType) {
 			case 'RadioType':
@@ -23,7 +26,6 @@ export default function PreviewCard({ cardId }: PreviewCardProps) {
 			case 'DndType':
 				return <PreviewDnd cardId={cardId} options={options} isRequired={isRequired} />;
 			case 'ShortType':
-				return <PreviewInputText cardId={cardId} isRequired={isRequired} textType={questionType} />;
 			case 'LongType':
 				return <PreviewInputText cardId={cardId} isRequired={isRequired} textType={questionType} />;
 			default:
@@ -35,6 +37,7 @@ export default function PreviewCard({ cardId }: PreviewCardProps) {
 		<PreviewCardWrapper>
 			<CardTitle>{cardTitle}</CardTitle>
 			{PreviewCardType()}
+			{requiredButNotAnswerd && <div>필수 질문입니다.</div>}
 		</PreviewCardWrapper>
 	);
 }

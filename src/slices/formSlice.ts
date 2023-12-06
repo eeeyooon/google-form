@@ -4,12 +4,14 @@ type FormState = {
 	cards: number[];
 	formTitle: string;
 	formDesc: string;
+	requiredCardId: number | null;
 };
 
 const initialState: FormState = {
 	cards: [1],
 	formTitle: '제목 없는 설문지',
 	formDesc: '',
+	requiredCardId: null,
 };
 
 export const formSlice = createSlice({
@@ -49,8 +51,12 @@ export const formSlice = createSlice({
 
 			state.cards = newCards;
 		},
+		addRequiredCardId: (state, action) => {
+			state.requiredCardId = action.payload;
+		},
 	},
 });
 
-export const { addCard, removeCard, updateFormTitle, updateFormDesc, addCopiedCard, moveCard } = formSlice.actions;
+export const { addCard, removeCard, updateFormTitle, updateFormDesc, addCopiedCard, moveCard, addRequiredCardId } =
+	formSlice.actions;
 export default formSlice.reducer;

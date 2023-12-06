@@ -2,6 +2,9 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { RootState } from '../../store';
 import PreviewCard from '../../components/PreviewCard';
+import { useDispatch } from 'react-redux';
+import { addRequiredCardId } from '../../slices/formSlice';
+import { addAnswer } from '../../slices/previewSlice';
 
 export default function Preview() {
 	const cards = useSelector((state: RootState) => state.form.cards);
@@ -10,23 +13,40 @@ export default function Preview() {
 	const questions = useSelector((state: RootState) => state.question.cards);
 	const previewAnswers = useSelector((state: RootState) => state.preview.answers);
 
-	const handleSubmit = () => {
-		const isAllRequiredAnswered = cards.every((cardId) => {
-			const question = questions[cardId];
-			if (question && question.isRequired) {
-				const answer = previewAnswers.find((answer) => answer.cardId === cardId);
-				return answer && answer.answer.trim() !== '';
-			}
-			return true;
-		});
+	const dispatch = useDispatch();
 
-		if (!isAllRequiredAnswered) {
+	const handleSubmit = () => {
+		let requiredCardId = null;
+
+		for (const cardId of cards) {
+			const question = questions[cardId];
+			const currentAnswer = previewAnswers.find((a) => a.cardId === cardId);
+
+			if (question.isRequired) {
+				if (!currentAnswer || currentAnswer.answer.trim() === '') {
+					requiredCardId = cardId;
+					break;
+				}
+			}
+
+			dispatch(
+				addAnswer({
+					cardId: cardId,
+					answer: currentAnswer ? currentAnswer.answer : '',
+					isRequired: question.isRequired,
+				}),
+			);
+		}
+
+		if (requiredCardId !== null) {
+			dispatch(addRequiredCardId(requiredCardId));
 			alert('모든 필수 질문에 답변해주세요.');
 			return;
 		}
 
 		console.log('제출된 답변:', previewAnswers);
 	};
+
 	return (
 		<PreviewWrapper>
 			<FormTitleSection>
