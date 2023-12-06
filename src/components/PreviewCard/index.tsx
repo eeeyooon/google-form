@@ -36,7 +36,6 @@ export default function PreviewCard({ cardId, value, onInputChange }: PreviewCar
 					<PreviewInputText
 						cardId={cardId}
 						textType={questionType}
-						isRequired={isRequired}
 						value={value as string}
 						onInputChange={onInputChange}
 					/>
