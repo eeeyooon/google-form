@@ -30,6 +30,7 @@ export default function Preview() {
 		for (const cardId of cards) {
 			const question = questions[cardId];
 			const answer = inputValues[cardId] || '';
+			const orderId = cards.indexOf(cardId);
 
 			if (question.isRequired && !answer) {
 				requiredCardId = cardId;
@@ -42,6 +43,7 @@ export default function Preview() {
 					answer: Array.isArray(answer) ? answer : [answer],
 					isRequired: question.isRequired,
 					question: question.cardTitle,
+					orderId: orderId,
 				}),
 			);
 		}
