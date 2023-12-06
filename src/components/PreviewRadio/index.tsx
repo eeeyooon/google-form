@@ -1,3 +1,5 @@
+import { SelectBoxInput } from '../styles';
+
 type PreviewRadioProps = {
 	cardId: number;
 	options: { id: string; text: string }[];
@@ -13,7 +15,7 @@ export default function PreviewRadio({ cardId, options, value, onInputChange }: 
 	return (
 		<>
 			{options.map((option) => (
-				<div key={option.id}>
+				<SelectBoxInput key={option.id}>
 					<input
 						type="radio"
 						id={`${cardId}-${option.id}`}
@@ -23,7 +25,7 @@ export default function PreviewRadio({ cardId, options, value, onInputChange }: 
 						onChange={handleChange}
 					/>
 					<label htmlFor={`${cardId}-${option.id}`}>{option.text}</label>
-				</div>
+				</SelectBoxInput>
 			))}
 		</>
 	);

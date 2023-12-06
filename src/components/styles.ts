@@ -8,3 +8,22 @@ export const HighlightBar = styled.div`
 	top: 0;
 	left: 0;
 `;
+
+export const SelectBoxInput = styled.div`
+	margin-left: 20px;
+	height: 25px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+
+	input {
+		accent-color: ${({ theme }) => theme.color.primary};
+		width: 18px;
+		height: 18px;
+	}
+
+	label {
+		font-size: 14px;
+		margin-left: 8px;
+	}
+`;

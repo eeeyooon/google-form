@@ -1,3 +1,5 @@
+import { SelectBoxInput } from '../styles';
+
 type PreviewCheckboxProps = {
 	cardId: number;
 	options: { id: string; text: string }[];
@@ -14,7 +16,7 @@ export default function PreviewCheckbox({ cardId, options, value = [], onInputCh
 	return (
 		<>
 			{options.map((option) => (
-				<div key={option.id}>
+				<SelectBoxInput key={option.id}>
 					<input
 						type="checkbox"
 						id={`${cardId}-${option.id}`}
@@ -23,7 +25,7 @@ export default function PreviewCheckbox({ cardId, options, value = [], onInputCh
 						onChange={(e) => handleChange(option.text, e.target.checked)}
 					/>
 					<label htmlFor={`${cardId}-${option.id}`}>{option.text}</label>
-				</div>
+				</SelectBoxInput>
 			))}
 		</>
 	);
