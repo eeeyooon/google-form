@@ -1,18 +1,16 @@
+import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import TitleSection from '../../components/TitleSection';
 import SideMenu from '../../components/SideMenu';
 import Card from '../../components/Card';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { addCard, moveCard } from '../../slices/formSlice';
 import { addCardState, updateFocus } from '../../slices/questionSlice';
-import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
 
 export default function Form() {
 	const dispatch = useDispatch();
 	const cards = useSelector((state: RootState) => state.form.cards);
-	const cardsData = useSelector((state: RootState) => state.question.cards);
 
 	const handleAddCard = () => {
 		const newCardId = Math.max(...cards, 0) + 1;
