@@ -1,6 +1,6 @@
-import { InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material';
 import { useState } from 'react';
-import styled from 'styled-components';
+import { MenuItemBox, SelectInput } from './styles';
 
 type PreviewDndProps = {
 	cardId: number;
@@ -35,17 +35,3 @@ export default function PreviewDnd({ cardId, options, onInputChange }: PreviewDn
 		</SelectInput>
 	);
 }
-
-const SelectInput = styled(Select)`
-	padding-right: 20px;
-	margin-left: 20px;
-	margin-bottom: 20px;
-	fieldset {
-		border: 1px solid ${({ theme }) => theme.color.lightgray} !important;
-	}
-`;
-
-const MenuItemBox = styled(MenuItem)`
-	padding-left: 20px;
-	padding-right: 30px;
-`;

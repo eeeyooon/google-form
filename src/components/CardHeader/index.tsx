@@ -23,6 +23,8 @@ export default function CardHeader({ cardId, isFocused, isRequired }: CardHeader
 		<CardHeaderWrapper>
 			<InputCardTitle
 				variant="filled"
+				name={`${cardId}-질문`}
+				id={`${cardId}-질문`}
 				placeholder="질문"
 				multiline
 				value={cardTitle}

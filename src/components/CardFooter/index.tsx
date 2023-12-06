@@ -46,7 +46,7 @@ export default function CardFooter({ cardId }: CardFooterProps) {
 				<FaRegTrashAlt />
 			</DeleteCard>
 			<RequiredCard>
-				필수 <RequiredSwitch checked={isRequired} onChange={handleSwitchChange} />
+				필수 <RequiredSwitch name={`필수옵션선택-${cardId}`} checked={isRequired} onChange={handleSwitchChange} />
 			</RequiredCard>
 		</CardFooterWrapper>
 	);
