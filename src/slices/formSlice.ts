@@ -31,16 +31,13 @@ export const formSlice = createSlice({
 		updateFormDesc: (state, action: PayloadAction<string>) => {
 			state.formDesc = action.payload;
 		},
-		addCopiedCard: (state, action: PayloadAction<number>) => {
-			const currentCardId = action.payload;
-			const currentCardIndex = state.cards.findIndex((cardId) => cardId === currentCardId);
-			const newCardId = currentCardId + 1;
+		addCopiedCard: (state, action: PayloadAction<{ copyId: number; originId: number }>) => {
+			const { copyId, originId } = action.payload;
 
-			if (currentCardIndex >= 0) {
-				state.cards.splice(currentCardIndex + 1, 0, newCardId);
-			}
-			for (let i = currentCardIndex + 2; i < state.cards.length; i++) {
-				state.cards[i] = state.cards[i - 1] + 1;
+			const destinationIndex = state.cards.findIndex((cardId) => cardId === originId) + 1;
+
+			if (destinationIndex >= 0) {
+				state.cards.splice(destinationIndex, 0, copyId);
 			}
 		},
 		moveCard: (state, action: PayloadAction<{ sourceIndex: number; destinationIndex: number }>) => {

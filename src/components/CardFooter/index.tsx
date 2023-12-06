@@ -26,8 +26,8 @@ export default function CardFooter({ cardId }: CardFooterProps) {
 	};
 	const handleCopyCard = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
-		dispatch(addCopiedCard(cardId));
 		const newCardId = Math.max(...cards) + 1;
+		dispatch(addCopiedCard({ copyId: newCardId, originId: cardId }));
 		dispatch(copyCardState({ originCardId: cardId, newCardId }));
 		dispatch(updateFocus(newCardId));
 	};
