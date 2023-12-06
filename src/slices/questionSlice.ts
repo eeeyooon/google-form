@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RADIO_TYPE } from '../const/QuestionTypes';
 
 export type Option = {
 	id: string;
@@ -22,7 +23,7 @@ type QuestionState = {
 const initialState: QuestionState = {
 	cards: {
 		1: {
-			questionType: 'RadioType',
+			questionType: RADIO_TYPE,
 			options: [{ id: '1', text: '옵션1' }],
 			cardTitle: '질문',
 			isRequired: false,
@@ -62,7 +63,7 @@ export const questionSlice = createSlice({
 		addCardState: (state, action: PayloadAction<number>) => {
 			const newCardId = action.payload;
 			state.cards[newCardId] = {
-				questionType: 'RadioType',
+				questionType: RADIO_TYPE,
 				options: [{ id: '1', text: '옵션1' }],
 				cardTitle: '질문',
 				isRequired: false,

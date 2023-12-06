@@ -11,6 +11,7 @@ import {
 } from './styles';
 import { MdOutlineClose } from 'react-icons/md';
 import { Option } from '../../../slices/questionSlice';
+import { CHECKBOX_TYPE, DND_TYPE, RADIO_TYPE } from '../../../const/QuestionTypes';
 
 type OptionTypeProps = {
 	cardId: number;
@@ -28,7 +29,7 @@ export default function OptionQuestion({ cardId, type, option, index, isFocused 
 
 	const SelectedOption = () => {
 		switch (type) {
-			case 'RadioType':
+			case RADIO_TYPE:
 				return (
 					<OptionBox
 						className="RadioType"
@@ -39,7 +40,7 @@ export default function OptionQuestion({ cardId, type, option, index, isFocused 
 						$isFocused={isFocused}
 					/>
 				);
-			case 'CheckboxType':
+			case CHECKBOX_TYPE:
 				return (
 					<OptionBox
 						className="CheckboxType"
@@ -50,7 +51,7 @@ export default function OptionQuestion({ cardId, type, option, index, isFocused 
 						$isFocused={isFocused}
 					/>
 				);
-			case 'DndType':
+			case DND_TYPE:
 				return (
 					<OptionBox
 						className="DndType"
@@ -69,11 +70,11 @@ export default function OptionQuestion({ cardId, type, option, index, isFocused 
 	return (
 		<OptionQuestionWrapper>
 			<OptionInputBox>
-				{type === 'RadioType' ? (
+				{type === RADIO_TYPE ? (
 					<RadioIcon />
-				) : type === 'CheckboxType' ? (
+				) : type === CHECKBOX_TYPE ? (
 					<CheckboxIcon />
-				) : type === 'DndType' ? (
+				) : type === DND_TYPE ? (
 					<DndIndex>{index + 1}</DndIndex>
 				) : null}
 				{SelectedOption()}

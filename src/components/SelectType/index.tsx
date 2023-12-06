@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setQuestionType } from '../../slices/questionSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { SHORT_TYPE, LONG_TYPE, RADIO_TYPE, CHECKBOX_TYPE, DND_TYPE } from '../../const/QuestionTypes';
 
 type SelectTypeProps = {
 	cardId: number;
@@ -26,11 +27,11 @@ export default function SelectType({ cardId }: SelectTypeProps) {
 	return (
 		<FormControl sx={{ m: 1, minWidth: 180 }}>
 			<TypeSelect id="select-type" value={selectedType} onChange={handleTypeChange}>
-				<TypeItem value="ShortType">단답형</TypeItem>
-				<TypeItem value="LongType">장문형</TypeItem>
-				<TypeItem value="RadioType">객관식 질문</TypeItem>
-				<TypeItem value="CheckboxType">체크박스</TypeItem>
-				<TypeItem value="DndType">드롭다운</TypeItem>
+				<TypeItem value={SHORT_TYPE}>단답형</TypeItem>
+				<TypeItem value={LONG_TYPE}>장문형</TypeItem>
+				<TypeItem value={RADIO_TYPE}>객관식 질문</TypeItem>
+				<TypeItem value={CHECKBOX_TYPE}>체크박스</TypeItem>
+				<TypeItem value={DND_TYPE}>드롭다운</TypeItem>
 			</TypeSelect>
 		</FormControl>
 	);

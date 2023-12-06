@@ -6,6 +6,7 @@ import PreviewDnd from '../PreviewDnd';
 import PreviewCheckbox from '../PreviewCheckbox';
 import { RequiredIcon } from '../styles';
 import { CardTitle, PreviewCardWrapper, RequiredInfo, RequiredInfoWrapper, WarningIcon } from './styles';
+import { CHECKBOX_TYPE, DND_TYPE, LONG_TYPE, RADIO_TYPE, SHORT_TYPE } from '../../const/QuestionTypes';
 
 type PreviewCardProps = {
 	cardId: number;
@@ -22,16 +23,16 @@ export default function PreviewCard({ cardId, value, onInputChange }: PreviewCar
 
 	const PreviewCardType = () => {
 		switch (questionType) {
-			case 'RadioType':
+			case RADIO_TYPE:
 				return <PreviewRadio cardId={cardId} options={options} value={value as string} onInputChange={onInputChange} />;
-			case 'CheckboxType':
+			case CHECKBOX_TYPE:
 				return (
 					<PreviewCheckbox cardId={cardId} options={options} value={value as string[]} onInputChange={onInputChange} />
 				);
-			case 'DndType':
+			case DND_TYPE:
 				return <PreviewDnd cardId={cardId} options={options} onInputChange={onInputChange} />;
-			case 'ShortType':
-			case 'LongType':
+			case SHORT_TYPE:
+			case LONG_TYPE:
 				return (
 					<PreviewInputText
 						cardId={cardId}

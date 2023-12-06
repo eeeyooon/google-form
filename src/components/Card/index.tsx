@@ -10,6 +10,7 @@ import { CheckboxIcon, DndIndex, RadioIcon } from '../Question/OptionQuestion/st
 import { HighlightBar } from '../styles';
 import { MdDragIndicator } from 'react-icons/md';
 import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
+import { CHECKBOX_TYPE, LONG_TYPE, RADIO_TYPE, SHORT_TYPE } from '../../const/QuestionTypes';
 
 type CardProps = {
 	cardId: number;
@@ -37,7 +38,7 @@ export default function Card({ cardId, dragHandleProps }: CardProps) {
 			{isFocused && <HighlightBar />}
 			<CardHeader cardId={cardId} isFocused={isFocused} isRequired={isRequired} />
 			<QuestionsWrapper>
-				{questionType === 'ShortType' || questionType === 'LongType' ? (
+				{questionType === SHORT_TYPE || questionType === LONG_TYPE ? (
 					<TextQuestion type={questionType} />
 				) : (
 					options.map((option, index) => (
@@ -52,11 +53,11 @@ export default function Card({ cardId, dragHandleProps }: CardProps) {
 					))
 				)}
 
-				{isFocused && questionType !== 'ShortType' && questionType !== 'LongType' ? (
+				{isFocused && questionType !== SHORT_TYPE && questionType !== LONG_TYPE ? (
 					<AddOptionBox>
-						{questionType === 'RadioType' ? (
+						{questionType === RADIO_TYPE ? (
 							<RadioIcon />
-						) : questionType === 'CheckboxType' ? (
+						) : questionType === CHECKBOX_TYPE ? (
 							<CheckboxIcon />
 						) : (
 							<DndIndex>{options.length + 1}</DndIndex>
