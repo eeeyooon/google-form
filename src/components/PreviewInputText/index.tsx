@@ -20,6 +20,7 @@ export default function PreviewInputText({ cardId, textType, value, onInputChang
 			variant="standard"
 			multiline={textType === 'LongType'}
 			$textType={textType}
+			placeholder="내 답변"
 		/>
 	);
 }

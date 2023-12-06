@@ -1,5 +1,6 @@
-import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material';
 import { useState } from 'react';
+import styled from 'styled-components';
 
 type PreviewDndProps = {
 	cardId: number;
@@ -16,12 +17,35 @@ export default function PreviewDnd({ cardId, options, onInputChange }: PreviewDn
 	};
 
 	return (
-		<Select value={selectedValue} onChange={handleChange} displayEmpty>
+		<SelectInput
+			value={selectedValue}
+			onChange={handleChange}
+			inputProps={{ 'aria-label': 'selectDropDown' }}
+			autoWidth
+			displayEmpty
+		>
+			<MenuItemBox value="" disabled>
+				<em>선택</em>
+			</MenuItemBox>
 			{options.map((option) => (
-				<MenuItem key={`${cardId}-${option.id}`} value={option.text}>
+				<MenuItemBox key={`${cardId}-${option.id}`} value={option.text}>
 					{option.text}
-				</MenuItem>
+				</MenuItemBox>
 			))}
-		</Select>
+		</SelectInput>
 	);
 }
+
+const SelectInput = styled(Select)`
+	padding-right: 20px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	fieldset {
+		border: 1px solid ${({ theme }) => theme.color.lightgray} !important;
+	}
+`;
+
+const MenuItemBox = styled(MenuItem)`
+	padding-left: 20px;
+	padding-right: 30px;
+`;

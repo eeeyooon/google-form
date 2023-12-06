@@ -69,6 +69,7 @@ const PreviewCardWrapper = styled.div<{ $isRequired: boolean; $requiredButNotAns
 	margin-top: 12px;
 	background-color: ${({ theme }) => theme.color.white};
 	padding-top: 12px;
+	padding-bottom: 10px;
 	border: 1px solid
 		${({ $isRequired, theme, $requiredButNotAnswerd }) =>
 			$isRequired && $requiredButNotAnswerd ? theme.color.red : theme.color.lightgray};
@@ -78,6 +79,7 @@ const CardTitle = styled.div`
 	line-height: 40px;
 	padding-left: 20px;
 	padding-right: 20px;
+	margin-bottom: 15px;
 `;
 
 const RequiredIcon = styled.span`

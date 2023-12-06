@@ -13,7 +13,6 @@ export default function Preview() {
 	const formData = useSelector((state: RootState) => state.form);
 	const { formTitle, formDesc } = formData;
 	const questions = useSelector((state: RootState) => state.question.cards);
-	const previewAnswers = useSelector((state: RootState) => state.preview.answers);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -57,8 +56,8 @@ export default function Preview() {
 	return (
 		<PreviewWrapper>
 			<FormTitleSection>
-				<FormTitle>{formTitle}</FormTitle>
-				<FormDesc>{formDesc}</FormDesc>
+				<FormTitle>{formTitle ? formTitle : '제목 없는 설문지'}</FormTitle>
+				{formDesc && <FormDesc>{formDesc}</FormDesc>}
 				<FormInfo>* 표시는 필수 질문임</FormInfo>
 			</FormTitleSection>
 			<form name="previewForm" id="previewForm" onSubmit={handleSubmit}>
@@ -88,10 +87,10 @@ const PreviewWrapper = styled.div`
 
 const FormTitleSection = styled.div`
 	width: 768px;
-	height: 170px;
 	border-radius: 10px;
 	background-color: ${({ theme }) => theme.color.white};
 	margin-top: 12px;
+	padding-bottom: 15px;
 	border: 1px solid ${({ theme }) => theme.color.lightgray};
 	border-top: 10px solid ${({ theme }) => theme.color.primary};
 `;
@@ -122,6 +121,7 @@ const FormInfo = styled.p`
 	padding-left: 20px;
 	line-height: 30px;
 	color: ${({ theme }) => theme.color.red};
+	font-size: 14px;
 `;
 
 const PreviewSubmitBtn = styled.button`
