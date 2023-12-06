@@ -1,11 +1,18 @@
 type PreviewCheckboxProps = {
 	cardId: number;
 	options: { id: string; text: string }[];
+	isRequired: boolean;
 	value: string[] | undefined;
 	onInputChange: (cardId: number, value: string[]) => void;
 };
 
-export default function PreviewCheckbox({ cardId, options, value = [], onInputChange }: PreviewCheckboxProps) {
+export default function PreviewCheckbox({
+	cardId,
+	options,
+	isRequired,
+	value = [],
+	onInputChange,
+}: PreviewCheckboxProps) {
 	const handleChange = (optionText: string, isChecked: boolean) => {
 		const updatedValues = isChecked ? [...value, optionText] : value.filter((text) => text !== optionText);
 		onInputChange(cardId, updatedValues);

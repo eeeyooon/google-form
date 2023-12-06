@@ -14,7 +14,7 @@ type PreviewCardProps = {
 export default function PreviewCard({ cardId, value, onInputChange }: PreviewCardProps) {
 	const CardData = useSelector((state: RootState) => state.question.cards[cardId]);
 
-	const { questionType, options, cardTitle } = CardData;
+	const { questionType, options, cardTitle, isRequired } = CardData;
 
 	const requirdCardId = useSelector((state: RootState) => state.form.requiredCardId);
 	const requiredButNotAnswerd = cardId === requirdCardId;
@@ -22,19 +22,34 @@ export default function PreviewCard({ cardId, value, onInputChange }: PreviewCar
 	const PreviewCardType = () => {
 		switch (questionType) {
 			case 'RadioType':
-				return <PreviewRadio cardId={cardId} options={options} value={value as string} onInputChange={onInputChange} />;
+				return (
+					<PreviewRadio
+						cardId={cardId}
+						options={options}
+						isRequired={isRequired}
+						value={value as string}
+						onInputChange={onInputChange}
+					/>
+				);
 			case 'CheckboxType':
 				return (
-					<PreviewCheckbox cardId={cardId} options={options} value={value as string[]} onInputChange={onInputChange} />
+					<PreviewCheckbox
+						cardId={cardId}
+						options={options}
+						isRequired={isRequired}
+						value={value as string[]}
+						onInputChange={onInputChange}
+					/>
 				);
 			case 'DndType':
-				return <PreviewDnd cardId={cardId} options={options} onInputChange={onInputChange} />;
+				return <PreviewDnd cardId={cardId} options={options} isRequired={isRequired} onInputChange={onInputChange} />;
 			case 'ShortType':
 			case 'LongType':
 				return (
 					<PreviewInputText
 						cardId={cardId}
 						textType={questionType}
+						isRequired={isRequired}
 						value={value as string}
 						onInputChange={onInputChange}
 					/>
