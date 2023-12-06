@@ -27,3 +27,9 @@ export const SelectBoxInput = styled.div`
 		margin-left: 8px;
 	}
 `;
+
+export const RequiredIcon = styled.span`
+	color: ${({ theme }) => theme.color.red};
+	font-weight: 600;
+	margin-left: 5px;
+`;

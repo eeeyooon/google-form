@@ -7,7 +7,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Form />} />
 				<Route path="/preview" element={<Preview />} />
-				<Route path="/submit" element={<Submit />} />
+				<Route path="/preview/submit" element={<Submit />} />
 			</Routes>
 		</BrowserRouter>
 	);

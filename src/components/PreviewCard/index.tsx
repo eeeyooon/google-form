@@ -6,6 +6,7 @@ import PreviewRadio from '../PreviewRadio';
 import PreviewDnd from '../PreviewDnd';
 import PreviewCheckbox from '../PreviewCheckbox';
 import { RiErrorWarningLine } from 'react-icons/ri';
+import { RequiredIcon } from '../styles';
 
 type PreviewCardProps = {
 	cardId: number;
@@ -80,12 +81,6 @@ const CardTitle = styled.div`
 	padding-left: 20px;
 	padding-right: 20px;
 	margin-bottom: 15px;
-`;
-
-const RequiredIcon = styled.span`
-	color: ${({ theme }) => theme.color.red};
-	font-weight: 600;
-	margin-left: 5px;
 `;
 
 const RequiredInfoWrapper = styled.div`
