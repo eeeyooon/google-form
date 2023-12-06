@@ -59,7 +59,16 @@ export default function Preview() {
 					<PreviewCard key={cardId} cardId={cardId} />
 				))}
 			</form>
-			<PreviewSubmitBtn onClick={handleSubmit}>제출</PreviewSubmitBtn>
+			<PreviewBtnWrapper>
+				<PreviewSubmitBtn onClick={handleSubmit}>제출</PreviewSubmitBtn>
+				<AnswerResetBtn
+					onClick={() => {
+						window.location.reload();
+					}}
+				>
+					양식 지우기
+				</AnswerResetBtn>
+			</PreviewBtnWrapper>
 		</PreviewWrapper>
 	);
 }
@@ -104,12 +113,22 @@ const FormInfo = styled.p`
 `;
 
 const PreviewSubmitBtn = styled.button`
-	width: 70px;
+	width: 80px;
 	text-align: center;
 	background-color: ${({ theme }) => theme.color.primary};
 	color: ${({ theme }) => theme.color.white};
 	padding: 10px 5px;
-	border-radius: 8px;
-	margin-top: 10px;
-	font-size: 1.125rem;
+	border-radius: 5px;
+	font-size: 1.0625rem;
+`;
+
+const PreviewBtnWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+`;
+const AnswerResetBtn = styled.button`
+	font-size: 0.9375rem;
+	color: ${({ theme }) => theme.color.primary};
 `;
