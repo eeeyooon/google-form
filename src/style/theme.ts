@@ -15,5 +15,6 @@ export const defaultTheme: DefaultTheme = {
 		inputgray: '#f8f9fa',
 		black: '#1c1c1c',
 		white: '#ffffff',
+		red: '#E03025',
 	},
 };

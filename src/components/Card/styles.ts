@@ -8,6 +8,7 @@ export const CardWrapper = styled.div`
 	padding-top: 12px;
 	position: relative;
 	overflow: hidden;
+	border: 1px solid ${({ theme }) => theme.color.lightgray};
 `;
 
 export const QuestionsWrapper = styled.div`

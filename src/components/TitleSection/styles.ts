@@ -7,6 +7,7 @@ export const TitleSectionWrapper = styled.div`
 	border-radius: 10px;
 	background-color: ${({ theme }) => theme.color.white};
 	margin-top: 12px;
+	border: 1px solid ${({ theme }) => theme.color.lightgray};
 	border-top: 10px solid ${({ theme }) => theme.color.primary};
 	position: relative;
 	overflow: hidden;

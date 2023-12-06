@@ -14,9 +14,6 @@ export default function Form() {
 	const cards = useSelector((state: RootState) => state.form.cards);
 	const cardsData = useSelector((state: RootState) => state.question.cards);
 
-	console.log(cardsData);
-	console.log(cards);
-
 	const handleAddCard = () => {
 		const newCardId = Math.max(...cards, 0) + 1;
 		dispatch(addCard(newCardId));

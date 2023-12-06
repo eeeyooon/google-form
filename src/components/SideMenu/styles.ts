@@ -13,6 +13,7 @@ export const SideMenuWrapper = styled.div`
 	flex-flow: column nowrap;
 	justify-content: space-evenly;
 	align-items: center;
+	border: 1px solid ${({ theme }) => theme.color.lightgray};
 
 	button {
 		font-size: 1.25rem;

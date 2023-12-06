@@ -51,8 +51,6 @@ export default function Preview() {
 			dispatch(addRequiredCardId(requiredCardId));
 			return;
 		}
-
-		console.log(previewAnswers);
 		navigate('/preview/submit');
 	};
 
@@ -61,7 +59,7 @@ export default function Preview() {
 			<FormTitleSection>
 				<FormTitle>{formTitle}</FormTitle>
 				<FormDesc>{formDesc}</FormDesc>
-				<FormInfo>*표시는 필수 질문임</FormInfo>
+				<FormInfo>* 표시는 필수 질문임</FormInfo>
 			</FormTitleSection>
 			<form name="previewForm" id="previewForm" onSubmit={handleSubmit}>
 				{cards.map((cardId) => (
@@ -90,10 +88,11 @@ const PreviewWrapper = styled.div`
 
 const FormTitleSection = styled.div`
 	width: 768px;
-	height: 160px;
+	height: 170px;
 	border-radius: 10px;
 	background-color: ${({ theme }) => theme.color.white};
 	margin-top: 12px;
+	border: 1px solid ${({ theme }) => theme.color.lightgray};
 	border-top: 10px solid ${({ theme }) => theme.color.primary};
 `;
 
@@ -101,6 +100,7 @@ const FormTitle = styled.h1`
 	height: 65px;
 	font-size: 32px;
 	padding-top: 12px;
+	padding-left: 20px;
 
 	&::placeholder {
 		color: ${({ theme }) => theme.color.black};
@@ -113,12 +113,15 @@ const FormDesc = styled.div`
 	margin-left: 20px;
 	margin-right: 20px;
 	margin-top: 8px;
+	margin-bottom: 10px;
 `;
 
 const FormInfo = styled.p`
 	border-top: 1px solid ${({ theme }) => theme.color.lightgray};
 	padding-top: 10px;
-	font-size: 18px;
+	padding-left: 20px;
+	line-height: 30px;
+	color: ${({ theme }) => theme.color.red};
 `;
 
 const PreviewSubmitBtn = styled.button`
