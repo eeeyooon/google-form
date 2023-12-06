@@ -4,11 +4,10 @@ import { useState } from 'react';
 type PreviewDndProps = {
 	cardId: number;
 	options: { id: string; text: string }[];
-	isRequired: boolean;
 	onInputChange: (cardId: number, value: string) => void;
 };
 
-export default function PreviewDnd({ cardId, options, isRequired, onInputChange }: PreviewDndProps) {
+export default function PreviewDnd({ cardId, options, onInputChange }: PreviewDndProps) {
 	const [selectedValue, setSelectedValue] = useState('');
 	const handleChange = (event: SelectChangeEvent) => {
 		const answer = event.target.value;
