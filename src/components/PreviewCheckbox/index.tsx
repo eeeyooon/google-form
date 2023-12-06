@@ -1,19 +1,16 @@
-import { useDispatch } from 'react-redux';
-import { PreviewOptionProps } from '../../types/options';
-import { addAnswer } from '../../slices/previewSlice';
-import { useState } from 'react';
+type PreviewCheckboxProps = {
+	cardId: number;
+	options: { id: string; text: string }[];
+	value: string[] | undefined;
+	onInputChange: (cardId: number, value: string[]) => void;
+};
 
-export default function PreviewCheckbox({ cardId, options, isRequired, question }: PreviewOptionProps) {
-	const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
-
-	const dispatch = useDispatch();
-	const handleChange = (option: string, checked: boolean) => {
-		const updatedAnswers = checked
-			? [...selectedAnswers, option]
-			: selectedAnswers.filter((answer) => answer !== option);
-		setSelectedAnswers(updatedAnswers);
-		dispatch(addAnswer({ cardId, answer: updatedAnswers, isRequired, question }));
+export default function PreviewCheckbox({ cardId, options, value = [], onInputChange }: PreviewCheckboxProps) {
+	const handleChange = (optionText: string, isChecked: boolean) => {
+		const updatedValues = isChecked ? [...value, optionText] : value.filter((text) => text !== optionText);
+		onInputChange(cardId, updatedValues);
 	};
+
 	return (
 		<>
 			{options.map((option) => (
@@ -22,6 +19,7 @@ export default function PreviewCheckbox({ cardId, options, isRequired, question 
 						type="checkbox"
 						id={`${cardId}-${option.id}`}
 						value={option.text}
+						checked={value.includes(option.text)}
 						onChange={(e) => handleChange(option.text, e.target.checked)}
 					/>
 					<label htmlFor={`${cardId}-${option.id}`}>{option.text}</label>

@@ -1,17 +1,18 @@
 import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { PreviewOptionProps } from '../../types/options';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addAnswer } from '../../slices/previewSlice';
 
-export default function PreviewDnd({ cardId, options, isRequired, question }: PreviewOptionProps) {
+type PreviewDndProps = {
+	cardId: number;
+	options: { id: string; text: string }[];
+	onInputChange: (cardId: number, value: string) => void;
+};
+
+export default function PreviewDnd({ cardId, options, onInputChange }: PreviewDndProps) {
 	const [selectedValue, setSelectedValue] = useState('');
-	const dispatch = useDispatch();
-
 	const handleChange = (event: SelectChangeEvent) => {
-		const answer = event.target.value || '';
+		const answer = event.target.value;
 		setSelectedValue(answer);
-		dispatch(addAnswer({ cardId, answer: [answer], isRequired, question }));
+		onInputChange(cardId, event.target.value);
 	};
 
 	return (

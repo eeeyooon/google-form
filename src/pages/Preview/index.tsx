@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addRequiredCardId } from '../../slices/formSlice';
 import { addAnswer } from '../../slices/previewSlice';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function Preview() {
 	const cards = useSelector((state: RootState) => state.form.cards);
@@ -17,24 +18,29 @@ export default function Preview() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const handleSubmit = () => {
+	const [inputValues, setInputValues] = useState<{ [cardId: number]: string | string[] }>({});
+
+	const handleInputChange = (cardId: number, value: string | string[]) => {
+		setInputValues((prev) => ({ ...prev, [cardId]: value }));
+	};
+
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
 		let requiredCardId = null;
 
 		for (const cardId of cards) {
 			const question = questions[cardId];
-			const currentAnswer = previewAnswers.find((a) => a.cardId === cardId);
+			const answer = inputValues[cardId] || '';
 
-			if (question.isRequired) {
-				if (!currentAnswer || currentAnswer.answer.length === 0) {
-					requiredCardId = cardId;
-					break;
-				}
+			if (question.isRequired && !answer) {
+				requiredCardId = cardId;
+				break;
 			}
 
 			dispatch(
 				addAnswer({
 					cardId: cardId,
-					answer: currentAnswer ? currentAnswer.answer : [],
+					answer: Array.isArray(answer) ? answer : [answer],
 					isRequired: question.isRequired,
 					question: question.cardTitle,
 				}),
@@ -46,9 +52,10 @@ export default function Preview() {
 			return;
 		}
 
-		navigate('/preview/submit');
 		console.log(previewAnswers);
+		navigate('/preview/submit');
 	};
+
 	return (
 		<PreviewWrapper>
 			<FormTitleSection>
@@ -56,21 +63,21 @@ export default function Preview() {
 				<FormDesc>{formDesc}</FormDesc>
 				<FormInfo>*표시는 필수 질문임</FormInfo>
 			</FormTitleSection>
-			<form name="previewForm" id="previewForm">
+			<form name="previewForm" id="previewForm" onSubmit={handleSubmit}>
 				{cards.map((cardId) => (
-					<PreviewCard key={cardId} cardId={cardId} />
+					<PreviewCard key={cardId} cardId={cardId} value={inputValues[cardId]} onInputChange={handleInputChange} />
 				))}
+				<PreviewBtnWrapper>
+					<PreviewSubmitBtn type="submit">제출</PreviewSubmitBtn>
+					<AnswerResetBtn
+						onClick={() => {
+							window.location.reload();
+						}}
+					>
+						양식 지우기
+					</AnswerResetBtn>
+				</PreviewBtnWrapper>
 			</form>
-			<PreviewBtnWrapper>
-				<PreviewSubmitBtn onClick={handleSubmit}>제출</PreviewSubmitBtn>
-				<AnswerResetBtn
-					onClick={() => {
-						window.location.reload();
-					}}
-				>
-					양식 지우기
-				</AnswerResetBtn>
-			</PreviewBtnWrapper>
 		</PreviewWrapper>
 	);
 }

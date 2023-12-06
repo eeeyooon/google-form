@@ -8,8 +8,10 @@ import PreviewCheckbox from '../PreviewCheckbox';
 
 type PreviewCardProps = {
 	cardId: number;
+	value: string | string[];
+	onInputChange: (cardId: number, value: string | string[]) => void;
 };
-export default function PreviewCard({ cardId }: PreviewCardProps) {
+export default function PreviewCard({ cardId, value, onInputChange }: PreviewCardProps) {
 	const CardData = useSelector((state: RootState) => state.question.cards[cardId]);
 
 	const { questionType, options, cardTitle, isRequired } = CardData;
@@ -20,15 +22,22 @@ export default function PreviewCard({ cardId }: PreviewCardProps) {
 	const PreviewCardType = () => {
 		switch (questionType) {
 			case 'RadioType':
-				return <PreviewRadio cardId={cardId} options={options} isRequired={isRequired} question={cardTitle} />;
+				return <PreviewRadio cardId={cardId} options={options} value={value as string} onInputChange={onInputChange} />;
 			case 'CheckboxType':
-				return <PreviewCheckbox cardId={cardId} options={options} isRequired={isRequired} question={cardTitle} />;
+				return (
+					<PreviewCheckbox cardId={cardId} options={options} value={value as string[]} onInputChange={onInputChange} />
+				);
 			case 'DndType':
-				return <PreviewDnd cardId={cardId} options={options} isRequired={isRequired} question={cardTitle} />;
+				return <PreviewDnd cardId={cardId} options={options} onInputChange={onInputChange} />;
 			case 'ShortType':
 			case 'LongType':
 				return (
-					<PreviewInputText cardId={cardId} isRequired={isRequired} textType={questionType} question={cardTitle} />
+					<PreviewInputText
+						cardId={cardId}
+						textType={questionType}
+						value={value as string}
+						onInputChange={onInputChange}
+					/>
 				);
 			default:
 				return;

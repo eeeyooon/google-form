@@ -1,18 +1,13 @@
-import { useDispatch } from 'react-redux';
-import { addAnswer } from '../../slices/previewSlice';
-
-type InputTextProps = {
+type PreviewInputTextProps = {
 	cardId: number;
-	isRequired: boolean;
 	textType: string;
-	question: string;
+	value: string;
+	onInputChange: (cardId: number, value: string) => void;
 };
 
-export default function PreviewInputText({ cardId, isRequired, textType, question }: InputTextProps) {
-	const dispatch = useDispatch();
+export default function PreviewInputText({ cardId, textType, value, onInputChange }: PreviewInputTextProps) {
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const answer = event.target.value || '';
-		dispatch(addAnswer({ cardId, answer: [answer], isRequired, question }));
+		onInputChange(cardId, event.target.value);
 	};
-	return <input type="text" name="previewInputText" onChange={handleChange} />;
+	return <input type="text" value={value || ''} onChange={handleChange} />;
 }
