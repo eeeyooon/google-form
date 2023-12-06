@@ -20,14 +20,16 @@ export default function PreviewCard({ cardId }: PreviewCardProps) {
 	const PreviewCardType = () => {
 		switch (questionType) {
 			case 'RadioType':
-				return <PreviewRadio cardId={cardId} options={options} isRequired={isRequired} />;
+				return <PreviewRadio cardId={cardId} options={options} isRequired={isRequired} question={cardTitle} />;
 			case 'CheckboxType':
-				return <PreviewCheckbox cardId={cardId} options={options} isRequired={isRequired} />;
+				return <PreviewCheckbox cardId={cardId} options={options} isRequired={isRequired} question={cardTitle} />;
 			case 'DndType':
-				return <PreviewDnd cardId={cardId} options={options} isRequired={isRequired} />;
+				return <PreviewDnd cardId={cardId} options={options} isRequired={isRequired} question={cardTitle} />;
 			case 'ShortType':
 			case 'LongType':
-				return <PreviewInputText cardId={cardId} isRequired={isRequired} textType={questionType} />;
+				return (
+					<PreviewInputText cardId={cardId} isRequired={isRequired} textType={questionType} question={cardTitle} />
+				);
 			default:
 				return;
 		}

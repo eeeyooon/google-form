@@ -2,11 +2,11 @@ import { useDispatch } from 'react-redux';
 import { PreviewOptionProps } from '../../types/options';
 import { addAnswer } from '../../slices/previewSlice';
 
-export default function PreviewCheckbox({ cardId, options, isRequired }: PreviewOptionProps) {
+export default function PreviewCheckbox({ cardId, options, isRequired, question }: PreviewOptionProps) {
 	const dispatch = useDispatch();
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const answer = event.target.value || '';
-		dispatch(addAnswer({ cardId, answer, isRequired }));
+		dispatch(addAnswer({ cardId, answer, isRequired, question }));
 	};
 	return (
 		<>

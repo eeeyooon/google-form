@@ -4,4 +4,5 @@ export type PreviewOptionProps = {
 	options: Option[];
 	cardId: number;
 	isRequired: boolean;
+	question: string;
 };

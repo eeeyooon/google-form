@@ -5,6 +5,7 @@ import PreviewCard from '../../components/PreviewCard';
 import { useDispatch } from 'react-redux';
 import { addRequiredCardId } from '../../slices/formSlice';
 import { addAnswer } from '../../slices/previewSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function Preview() {
 	const cards = useSelector((state: RootState) => state.form.cards);
@@ -14,6 +15,7 @@ export default function Preview() {
 	const previewAnswers = useSelector((state: RootState) => state.preview.answers);
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const handleSubmit = () => {
 		let requiredCardId = null;
@@ -34,17 +36,17 @@ export default function Preview() {
 					cardId: cardId,
 					answer: currentAnswer ? currentAnswer.answer : '',
 					isRequired: question.isRequired,
+					question: question.cardTitle,
 				}),
 			);
 		}
 
 		if (requiredCardId !== null) {
 			dispatch(addRequiredCardId(requiredCardId));
-			alert('모든 필수 질문에 답변해주세요.');
 			return;
 		}
 
-		console.log('제출된 답변:', previewAnswers);
+		navigate('/preview/submit');
 	};
 
 	return (

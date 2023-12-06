@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addAnswer } from '../../slices/previewSlice';
 
-export default function PreviewDnd({ cardId, options, isRequired }: PreviewOptionProps) {
+export default function PreviewDnd({ cardId, options, isRequired, question }: PreviewOptionProps) {
 	const [selectedValue, setSelectedValue] = useState('');
 	const dispatch = useDispatch();
 
 	const handleChange = (event: SelectChangeEvent) => {
 		const answer = event.target.value || '';
 		setSelectedValue(answer);
-		dispatch(addAnswer({ cardId, answer, isRequired }));
+		dispatch(addAnswer({ cardId, answer, isRequired, question }));
 	};
 
 	return (

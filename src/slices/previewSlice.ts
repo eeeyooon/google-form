@@ -4,6 +4,7 @@ type Answer = {
 	cardId: number;
 	answer: string;
 	isRequired: boolean;
+	question: string;
 };
 
 type PreviewState = {
