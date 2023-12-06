@@ -1,12 +1,26 @@
+import { useDispatch } from 'react-redux';
 import { PreviewOptionProps } from '../../types/options';
+import { addAnswer } from '../../slices/previewSlice';
 
-export default function PreviewRadio({ options, isRequired }: PreviewOptionProps) {
+export default function PreviewRadio({ cardId, options, isRequired }: PreviewOptionProps) {
+	const dispatch = useDispatch();
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const answer = event.target.value || '';
+		dispatch(addAnswer({ cardId, answer, isRequired }));
+	};
+
 	return (
 		<>
 			{options.map((option) => (
 				<div key={option.id}>
-					<input type="radio" id={`radio-${option.id}`} value={option.text} name="radio-group" />
-					<label htmlFor={`radio-${option.id}`}>{option.text}</label>
+					<input
+						type="radio"
+						id={`${cardId}-${option.id}`}
+						value={option.text}
+						name="radio-group"
+						onChange={handleChange}
+					/>
+					<label htmlFor={`${cardId}-${option.id}`}>{option.text}</label>
 				</div>
 			))}
 		</>

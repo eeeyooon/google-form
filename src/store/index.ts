@@ -4,10 +4,12 @@ import { formSlice } from '../slices/formSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
+import { previewSlice } from '../slices/previewSlice';
 
 const rootReducer = combineReducers({
 	form: formSlice.reducer,
 	question: questionSlice.reducer,
+	preview: previewSlice.reducer,
 });
 
 const persistConfg = {

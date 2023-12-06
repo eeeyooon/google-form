@@ -1,14 +1,32 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { RootState } from '../../store';
 import PreviewCard from '../../components/PreviewCard';
-import { TitleSectionWrapper } from '../../components/TitleSection/styles';
 
 export default function Preview() {
 	const cards = useSelector((state: RootState) => state.form.cards);
 	const formData = useSelector((state: RootState) => state.form);
 	const { formTitle, formDesc } = formData;
+	const questions = useSelector((state: RootState) => state.question.cards);
+	const previewAnswers = useSelector((state: RootState) => state.preview.answers);
 
+	const handleSubmit = () => {
+		const isAllRequiredAnswered = cards.every((cardId) => {
+			const question = questions[cardId];
+			if (question && question.isRequired) {
+				const answer = previewAnswers.find((answer) => answer.cardId === cardId);
+				return answer && answer.answer.trim() !== '';
+			}
+			return true;
+		});
+
+		if (!isAllRequiredAnswered) {
+			alert('모든 필수 질문에 답변해주세요.');
+			return;
+		}
+
+		console.log('제출된 답변:', previewAnswers);
+	};
 	return (
 		<PreviewWrapper>
 			<FormTitleSection>
@@ -21,14 +39,15 @@ export default function Preview() {
 					<PreviewCard key={cardId} cardId={cardId} />
 				))}
 			</form>
+			<PreviewSubmitBtn onClick={handleSubmit}>제출</PreviewSubmitBtn>
 		</PreviewWrapper>
 	);
 }
 
 const PreviewWrapper = styled.div`
 	background-color: ${({ theme }) => theme.color.background};
-	height: 100vh;
 	width: 100%;
+	margin-bottom: 40px;
 `;
 
 const FormTitleSection = styled.div`
@@ -62,4 +81,15 @@ const FormInfo = styled.p`
 	border-top: 1px solid ${({ theme }) => theme.color.lightgray};
 	padding-top: 10px;
 	font-size: 18px;
+`;
+
+const PreviewSubmitBtn = styled.button`
+	width: 70px;
+	text-align: center;
+	background-color: ${({ theme }) => theme.color.primary};
+	color: ${({ theme }) => theme.color.white};
+	padding: 10px 5px;
+	border-radius: 8px;
+	margin-top: 10px;
+	font-size: 1.125rem;
 `;
