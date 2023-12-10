@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { RootState } from '../../store';
 import { addRequiredCardId } from '../../slices/formSlice';
 import { addAnswer } from '../../slices/previewSlice';
@@ -27,41 +27,44 @@ export default function Preview() {
 
 	const [inputValues, setInputValues] = useState<{ [cardId: number]: string | string[] }>({});
 
-	const handleInputChange = (cardId: number, value: string | string[]) => {
+	const handleInputChange = useCallback((cardId: number, value: string | string[]) => {
 		setInputValues((prev) => ({ ...prev, [cardId]: value }));
-	};
+	}, []);
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		let requiredCardId = null;
+	const handleSubmit = useCallback(
+		(event: React.FormEvent<HTMLFormElement>) => {
+			event.preventDefault();
+			let requiredCardId = null;
 
-		for (const cardId of cards) {
-			const question = questions[cardId];
-			const answer = inputValues[cardId] || '';
-			const orderId = cards.indexOf(cardId);
+			for (const cardId of cards) {
+				const question = questions[cardId];
+				const answer = inputValues[cardId] || '';
+				const orderId = cards.indexOf(cardId);
 
-			if (question.isRequired && !answer) {
-				requiredCardId = cardId;
-				break;
+				if (question.isRequired && !answer) {
+					requiredCardId = cardId;
+					break;
+				}
+
+				dispatch(
+					addAnswer({
+						cardId: cardId,
+						answer: Array.isArray(answer) ? answer : [answer],
+						isRequired: question.isRequired,
+						question: question.cardTitle,
+						orderId: orderId,
+					}),
+				);
 			}
 
-			dispatch(
-				addAnswer({
-					cardId: cardId,
-					answer: Array.isArray(answer) ? answer : [answer],
-					isRequired: question.isRequired,
-					question: question.cardTitle,
-					orderId: orderId,
-				}),
-			);
-		}
-
-		if (requiredCardId !== null) {
-			dispatch(addRequiredCardId(requiredCardId));
-			return;
-		}
-		navigate('/preview/submit');
-	};
+			if (requiredCardId !== null) {
+				dispatch(addRequiredCardId(requiredCardId));
+				return;
+			}
+			navigate('/preview/submit');
+		},
+		[cards, questions, inputValues, dispatch, navigate],
+	);
 
 	return (
 		<PreviewWrapper>

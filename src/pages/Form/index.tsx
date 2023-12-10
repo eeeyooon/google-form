@@ -7,27 +7,32 @@ import Card from '../../components/Card';
 import { RootState } from '../../store';
 import { addCard, moveCard } from '../../slices/formSlice';
 import { addCardState, updateFocus } from '../../slices/questionSlice';
+import { useCallback } from 'react';
+import React from 'react';
 
-export default function Form() {
+const Form = React.memo(() => {
 	const dispatch = useDispatch();
 	const cards = useSelector((state: RootState) => state.form.cards);
 
-	const handleAddCard = () => {
+	const handleAddCard = useCallback(() => {
 		const newCardId = Math.max(...cards, 0) + 1;
 		dispatch(addCard(newCardId));
 		dispatch(addCardState(newCardId));
 		dispatch(updateFocus(newCardId));
-	};
+	}, [cards, dispatch]);
 
-	const onDragEnd = (result: DropResult) => {
-		if (!result.destination) return;
-		dispatch(
-			moveCard({
-				sourceIndex: result.source.index,
-				destinationIndex: result.destination.index,
-			}),
-		);
-	};
+	const onDragEnd = useCallback(
+		(result: DropResult) => {
+			if (!result.destination) return;
+			dispatch(
+				moveCard({
+					sourceIndex: result.source.index,
+					destinationIndex: result.destination.index,
+				}),
+			);
+		},
+		[dispatch],
+	);
 
 	return (
 		<FormWrapper>
@@ -53,7 +58,7 @@ export default function Form() {
 			<SideMenu addCard={handleAddCard} />
 		</FormWrapper>
 	);
-}
+});
 
 const FormWrapper = styled.div`
 	background-color: ${({ theme }) => theme.color.background};
@@ -61,3 +66,6 @@ const FormWrapper = styled.div`
 	position: relative;
 	margin-bottom: 50px;
 `;
+
+Form.displayName = 'Form';
+export default Form;
