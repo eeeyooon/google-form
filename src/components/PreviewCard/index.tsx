@@ -7,13 +7,14 @@ import PreviewCheckbox from '../PreviewCheckbox';
 import { RequiredIcon } from '../styles';
 import { CardTitle, PreviewCardWrapper, RequiredInfo, RequiredInfoWrapper, WarningIcon } from './styles';
 import { CHECKBOX_TYPE, DND_TYPE, LONG_TYPE, RADIO_TYPE, SHORT_TYPE } from '../../const/QuestionTypes';
+import React from 'react';
 
 type PreviewCardProps = {
 	cardId: number;
 	value: string | string[];
 	onInputChange: (cardId: number, value: string | string[]) => void;
 };
-export default function PreviewCard({ cardId, value, onInputChange }: PreviewCardProps) {
+const PreviewCard = React.memo(({ cardId, value, onInputChange }: PreviewCardProps) => {
 	const CardData = useSelector((state: RootState) => state.question.cards[cardId]);
 
 	const { questionType, options, cardTitle, isRequired } = CardData;
@@ -61,4 +62,7 @@ export default function PreviewCard({ cardId, value, onInputChange }: PreviewCar
 			)}
 		</PreviewCardWrapper>
 	);
-}
+});
+
+PreviewCard.displayName = 'PreviewCard';
+export default PreviewCard;

@@ -12,6 +12,7 @@ import {
 import { MdOutlineClose } from 'react-icons/md';
 import { Option } from '../../../slices/questionSlice';
 import { CHECKBOX_TYPE, DND_TYPE, RADIO_TYPE } from '../../../const/QuestionTypes';
+import React from 'react';
 
 type OptionTypeProps = {
 	cardId: number;
@@ -20,7 +21,7 @@ type OptionTypeProps = {
 	index: number;
 	isFocused: boolean;
 };
-export default function OptionQuestion({ cardId, type, option, index, isFocused }: OptionTypeProps) {
+const OptionQuestion = React.memo(({ cardId, type, option, index, isFocused }: OptionTypeProps) => {
 	const dispatch = useDispatch();
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,4 +87,7 @@ export default function OptionQuestion({ cardId, type, option, index, isFocused 
 			)}
 		</OptionQuestionWrapper>
 	);
-}
+});
+
+OptionQuestion.displayName = 'OptionQuestion';
+export default OptionQuestion;

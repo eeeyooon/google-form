@@ -17,13 +17,14 @@ import {
 	Droppable,
 } from 'react-beautiful-dnd';
 import { CHECKBOX_TYPE, LONG_TYPE, RADIO_TYPE, SHORT_TYPE } from '../../const/QuestionTypes';
+import React, { useCallback } from 'react';
 
 type CardProps = {
 	cardId: number;
 	dragHandleProps?: DraggableProvidedDragHandleProps | null;
 };
 
-const Card = ({ cardId, dragHandleProps }: CardProps) => {
+const Card = React.memo(({ cardId, dragHandleProps }: CardProps) => {
 	const cardState = useSelector((state: RootState) => state.question.cards[cardId]);
 
 	const dispatch = useDispatch();
@@ -32,9 +33,9 @@ const Card = ({ cardId, dragHandleProps }: CardProps) => {
 	const isFocused = useSelector((state: RootState) => state.question.cards[cardId].isFocused);
 	const isRequired = useSelector((state: RootState) => state.question.cards[cardId].isRequired);
 
-	const handleFocus = () => {
+	const handleFocus = useCallback(() => {
 		dispatch(updateFocus(cardId));
-	};
+	}, [cardId, dispatch]);
 
 	const onDragEnd = (result: DropResult) => {
 		if (!result.destination) return;
@@ -91,6 +92,7 @@ const Card = ({ cardId, dragHandleProps }: CardProps) => {
 			{isFocused && <CardFooter cardId={cardId} />}
 		</CardWrapper>
 	);
-};
+});
 
+Card.displayName = 'Card';
 export default Card;

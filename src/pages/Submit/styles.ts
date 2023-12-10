@@ -23,7 +23,7 @@ export const SubmitCard = styled.div`
 	margin-bottom: 15px;
 `;
 
-export const SubmitQuestion = styled.p`
+export const SubmitQuestion = styled.div`
 	margin-bottom: 12px;
 `;
 
@@ -35,7 +35,7 @@ export const NotAnswered = styled.span`
 	color: ${({ theme }) => theme.color.primary};
 `;
 
-export const SubmitCheckboxWrapper = styled.p`
+export const SubmitCheckboxWrapper = styled.div`
 	margin-bottom: 10px;
 	height: 20px;
 `;
