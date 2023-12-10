@@ -97,6 +97,14 @@ export const questionSlice = createSlice({
 				state.cards[parseInt(cardId)].isFocused = parseInt(cardId) === action.payload;
 			});
 		},
+		moveOption: (state, action: PayloadAction<{ cardId: number; sourceIndex: number; destinationIndex: number }>) => {
+			const { cardId, sourceIndex, destinationIndex } = action.payload;
+			const newOptions = Array.from(state.cards[cardId].options);
+			const movedOption = newOptions.splice(sourceIndex, 1)[0];
+			newOptions.splice(destinationIndex, 0, movedOption);
+
+			state.cards[cardId].options = newOptions;
+		},
 	},
 });
 
@@ -111,5 +119,6 @@ export const {
 	toggleRequired,
 	copyCardState,
 	updateFocus,
+	moveOption,
 } = questionSlice.actions;
 export default questionSlice.reducer;
