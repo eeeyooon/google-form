@@ -1,5 +1,8 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { removeOption, updateOption } from '../../../slices/questionSlice';
+import { Option } from '../../../slices/questionSlice';
+import { CHECKBOX_TYPE, DND_TYPE, RADIO_TYPE } from '../../../const/QuestionTypes';
 import {
 	OptionQuestionWrapper,
 	DeleteOption,
@@ -10,9 +13,6 @@ import {
 	OptionBox,
 } from './styles';
 import { MdOutlineClose } from 'react-icons/md';
-import { Option } from '../../../slices/questionSlice';
-import { CHECKBOX_TYPE, DND_TYPE, RADIO_TYPE } from '../../../const/QuestionTypes';
-import React from 'react';
 
 type OptionTypeProps = {
 	cardId: number;
@@ -23,7 +23,6 @@ type OptionTypeProps = {
 };
 const OptionQuestion = React.memo(({ cardId, type, option, index, isFocused }: OptionTypeProps) => {
 	const dispatch = useDispatch();
-
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(updateOption({ cardId, optionId: option.id, value: e.target.value }));
 	};

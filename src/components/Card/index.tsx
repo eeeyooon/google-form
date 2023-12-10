@@ -1,11 +1,12 @@
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addOption, moveOption, updateFocus } from '../../slices/questionSlice';
 import { RootState } from '../../store';
 import CardFooter from '../CardFooter';
 import CardHeader from '../CardHeader';
 import { OptionQuestion, TextQuestion } from '../Question';
+import { CHECKBOX_TYPE, LONG_TYPE, RADIO_TYPE, SHORT_TYPE } from '../../const/QuestionTypes';
 import { CardWrapper, AddOption, AddOptionBox, QuestionsWrapper, DragButton } from './styles';
-import { useSelector } from 'react-redux';
-import { addOption, moveOption, updateFocus } from '../../slices/questionSlice';
-import { useDispatch } from 'react-redux';
 import { CheckboxIcon, DndIndex, RadioIcon } from '../Question/OptionQuestion/styles';
 import { HighlightBar } from '../styles';
 import { MdDragIndicator } from 'react-icons/md';
@@ -16,8 +17,6 @@ import {
 	DropResult,
 	Droppable,
 } from 'react-beautiful-dnd';
-import { CHECKBOX_TYPE, LONG_TYPE, RADIO_TYPE, SHORT_TYPE } from '../../const/QuestionTypes';
-import React, { useCallback } from 'react';
 
 type CardProps = {
 	cardId: number;
@@ -25,13 +24,9 @@ type CardProps = {
 };
 
 const Card = React.memo(({ cardId, dragHandleProps }: CardProps) => {
-	const cardState = useSelector((state: RootState) => state.question.cards[cardId]);
-
 	const dispatch = useDispatch();
-	const { questionType, options } = cardState;
-
-	const isFocused = useSelector((state: RootState) => state.question.cards[cardId].isFocused);
-	const isRequired = useSelector((state: RootState) => state.question.cards[cardId].isRequired);
+	const cardState = useSelector((state: RootState) => state.question.cards[cardId]);
+	const { questionType, options, isFocused, isRequired } = cardState;
 
 	const handleFocus = useCallback(() => {
 		dispatch(updateFocus(cardId));

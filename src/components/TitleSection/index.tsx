@@ -1,10 +1,9 @@
-import { useDispatch } from 'react-redux';
-import { TitleSectionWrapper, InputWrapper, InputTitle, InputDesc } from './styles';
-import { HighlightBar } from '../styles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { updateFormDesc, updateFormTitle } from '../../slices/formSlice';
 import { updateFocus } from '../../slices/questionSlice';
+import { TitleSectionWrapper, InputWrapper, InputTitle, InputDesc } from './styles';
+import { HighlightBar } from '../styles';
 
 export default function TitleSection() {
 	const dispatch = useDispatch();

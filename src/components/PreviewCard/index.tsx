@@ -16,9 +16,7 @@ type PreviewCardProps = {
 };
 const PreviewCard = React.memo(({ cardId, value, onInputChange }: PreviewCardProps) => {
 	const CardData = useSelector((state: RootState) => state.question.cards[cardId]);
-
 	const { questionType, options, cardTitle, isRequired } = CardData;
-
 	const requirdCardId = useSelector((state: RootState) => state.form.requiredCardId);
 	const requiredButNotAnswerd = cardId === requirdCardId;
 

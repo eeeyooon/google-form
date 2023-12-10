@@ -1,10 +1,10 @@
-import { MdContentCopy } from 'react-icons/md';
-import { FaRegTrashAlt } from 'react-icons/fa';
-import { CardFooterWrapper, CopyCard, DeleteCard, RequiredCard, RequiredSwitch } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import { addCopiedCard, removeCard } from '../../slices/formSlice';
 import { copyCardState, removeCardState, toggleRequired, updateFocus } from '../../slices/questionSlice';
-import { RootState } from '../../store';
+import { CardFooterWrapper, CopyCard, DeleteCard, RequiredCard, RequiredSwitch } from './styles';
+import { MdContentCopy } from 'react-icons/md';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 type CardFooterProps = {
 	cardId: number;
@@ -24,6 +24,7 @@ export default function CardFooter({ cardId }: CardFooterProps) {
 		dispatch(removeCardState(cardId));
 		dispatch(updateFocus(newFocusCardId));
 	};
+
 	const handleCopyCard = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
 		const newCardId = Math.max(...cards) + 1;

@@ -1,5 +1,5 @@
-import { SelectChangeEvent } from '@mui/material';
 import { useState } from 'react';
+import { SelectChangeEvent } from '@mui/material';
 import { MenuItemBox, SelectInput } from './styles';
 
 type PreviewDndProps = {
@@ -10,6 +10,7 @@ type PreviewDndProps = {
 
 export default function PreviewDnd({ cardId, options, onInputChange }: PreviewDndProps) {
 	const [selectedValue, setSelectedValue] = useState('');
+
 	const handleChange = (event: SelectChangeEvent) => {
 		const answer = event.target.value;
 		setSelectedValue(answer);

@@ -1,14 +1,13 @@
-import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { addCard, moveCard } from '../../slices/formSlice';
+import { addCardState, updateFocus } from '../../slices/questionSlice';
+import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import TitleSection from '../../components/TitleSection';
 import SideMenu from '../../components/SideMenu';
 import Card from '../../components/Card';
-import { RootState } from '../../store';
-import { addCard, moveCard } from '../../slices/formSlice';
-import { addCardState, updateFocus } from '../../slices/questionSlice';
-import { useCallback } from 'react';
-import React from 'react';
 
 const Form = React.memo(() => {
 	const dispatch = useDispatch();

@@ -32,7 +32,6 @@ export const previewSlice = createSlice({
 			} else {
 				state.answers.push(action.payload);
 			}
-
 			sortAnswers();
 		},
 	},

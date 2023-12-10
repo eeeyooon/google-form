@@ -1,6 +1,6 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { addRequiredCardId } from '../../slices/formSlice';
 import { addAnswer } from '../../slices/previewSlice';
@@ -21,11 +21,10 @@ export default function Preview() {
 	const formData = useSelector((state: RootState) => state.form);
 	const questions = useSelector((state: RootState) => state.question.cards);
 	const { formTitle, formDesc } = formData;
+	const [inputValues, setInputValues] = useState<{ [cardId: number]: string | string[] }>({});
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
-	const [inputValues, setInputValues] = useState<{ [cardId: number]: string | string[] }>({});
 
 	const handleInputChange = useCallback((cardId: number, value: string | string[]) => {
 		setInputValues((prev) => ({ ...prev, [cardId]: value }));

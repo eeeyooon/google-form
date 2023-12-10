@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { setQuestionType } from '../../slices/questionSlice';
+import { SHORT_TYPE, LONG_TYPE, RADIO_TYPE, CHECKBOX_TYPE, DND_TYPE } from '../../const/QuestionTypes';
 import { FormControl, SelectChangeEvent } from '@mui/material';
 import { TypeSelect, TypeItem } from './styles';
-import { useDispatch } from 'react-redux';
-import { setQuestionType } from '../../slices/questionSlice';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { SHORT_TYPE, LONG_TYPE, RADIO_TYPE, CHECKBOX_TYPE, DND_TYPE } from '../../const/QuestionTypes';
 
 type SelectTypeProps = {
 	cardId: number;
 };
+
 export default function SelectType({ cardId }: SelectTypeProps) {
 	const dispatch = useDispatch();
 	const currentType = useSelector((state: RootState) => state.question.cards[cardId]).questionType;
