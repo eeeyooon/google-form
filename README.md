@@ -19,6 +19,17 @@ yarn start
 
 <br/>
 <br/>
+
+## 프로젝트 개요
+
+📢 프로젝트 주제 : 구글 설문조사 기능을 구현한 프로젝트입니다.
+
+📆 프로젝트 기간 : 231202 ~ 231211
+
+💜 [구글 설문조사 사용해보기](https://google-form-eeeyooon.vercel.app/)
+
+<br/>
+
 <br/>
 
 ## 기술 스택
@@ -27,8 +38,6 @@ yarn start
 
 폴더 구조와 라이브러리는 README 하단에서 확인할 수 있습니다.
 <br/>
-
-[💜 구글 설문조사 사용해보기](https://google-form-eeeyooon.vercel.app/)
 
 <br/>
 <br/>
