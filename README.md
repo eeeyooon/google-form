@@ -1,4 +1,4 @@
-# 구글 설문조사 만들기
+# 구글 설문조사 구현
 
 <br/>
 
@@ -32,16 +32,6 @@ yarn start
 폴더 구조와 라이브러리는 README 하단에서 확인할 수 있습니다.
 
 <br/>
-<br/>
-<br/>
-
-## 추가 구현한 요구사항
-
-- 양식 지우기
-- 질문 데이터 저장 (브라우저 새로고침 시 유지)
-- 사용자 친화적인 UI/UX
-- 렌더링 성능 최적화
-
 <br/>
 <br/>
 
@@ -127,87 +117,6 @@ yarn start
 <br/>
 <br/>
 
-### 렌더링 성능 최적화
-
-1. `React.memo`로 불필요한 리렌더링 방지
-
-`React.memo`를 사용하여 `props`가 변경될 때만 리렌더링되도록 적용하였습니다. 자주 리렌더링되는 컴포넌트 혹은 자식 컴포넌트가 많은 컴포넌트인 `Card`, `OptionQuestion`, `PreviewCard` 컴포넌트 등에 적용하였습니다.
-
-<br/>
-<br/>
-
-2. `useCallback`을 사용한 불필요한 리렌더링 방지
-
-`useCallback`은 의존성 배열 내의 값이 변경될 때만 함수를 새로 생성하기 때문에, 함수의 참조가 변경되지 않았을 때 불필요한 리렌더링을 방지하기 위해 사용하였습니다.
-
-<br/>
-
-**기존 코드**
-
-```ts
-// Card 컴포넌트
-const handleFocus = () => {
-	dispatch(updateFocus(cardId));
-};
-```
-
-```ts
-// Form 컴포넌트
-const handleAddCard = () => {
-	const newCardId = Math.max(...cards, 0) + 1;
-	dispatch(addCard(newCardId));
-	dispatch(addCardState(newCardId));
-	dispatch(updateFocus(newCardId));
-};
-
-const onDragEnd = (result: DropResult) => {
-	if (!result.destination) return;
-	dispatch(
-		moveCard({
-			sourceIndex: result.source.index,
-			destinationIndex: result.destination.index,
-		}),
-	);
-};
-```
-
-<br/>
-<br/>
-
-**변경 코드**
-
-```ts
-const handleFocus = useCallback(() => {
-	dispatch(updateFocus(cardId));
-}, [cardId, dispatch]);
-```
-
-```ts
-const handleAddCard = useCallback(() => {
-	const newCardId = Math.max(...cards, 0) + 1;
-	dispatch(addCard(newCardId));
-	dispatch(addCardState(newCardId));
-	dispatch(updateFocus(newCardId));
-}, [cards, dispatch]);
-
-const onDragEnd = useCallback(
-	(result: DropResult) => {
-		if (!result.destination) return;
-		dispatch(
-			moveCard({
-				sourceIndex: result.source.index,
-				destinationIndex: result.destination.index,
-			}),
-		);
-	},
-	[dispatch],
-);
-```
-
-<br/>
-<br/>
-
-<br/>
 <br/>
 <br/>
 <br/>
