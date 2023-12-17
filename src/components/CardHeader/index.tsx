@@ -26,7 +26,7 @@ export default function CardHeader({ cardId, isFocused, isRequired }: CardHeader
 				id={`${cardId}-질문`}
 				placeholder="질문"
 				multiline
-				value={cardTitle}
+				value={isRequired && !isFocused ? cardTitle + ' *' : cardTitle}
 				onChange={handleInputChange}
 				$isFocused={isFocused}
 				$isRequired={isRequired}
