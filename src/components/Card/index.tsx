@@ -38,7 +38,7 @@ const Card = React.memo(({ cardId, dragHandleProps }: CardProps) => {
 	};
 
 	return (
-		<CardWrapper onClick={handleFocus}>
+		<CardWrapper onClick={handleFocus} $isFocused={isFocused}>
 			<DragButton className="DragIcon" {...dragHandleProps} $isFocused={isFocused}>
 				<MdDragIndicator />
 			</DragButton>

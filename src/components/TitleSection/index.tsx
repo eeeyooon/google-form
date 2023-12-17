@@ -30,7 +30,7 @@ export default function TitleSection() {
 	};
 
 	return (
-		<TitleSectionWrapper onClick={handleFocus}>
+		<TitleSectionWrapper onClick={handleFocus} $isFocused={isFocused}>
 			{isFocused && <HighlightBar />}
 			<InputWrapper>
 				<InputTitle

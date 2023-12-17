@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 
-export const TitleSectionWrapper = styled.div`
+export const TitleSectionWrapper = styled.div<{ $isFocused: boolean }>`
 	width: 768px;
 	height: 138px;
 	border-radius: 10px;
@@ -11,6 +11,7 @@ export const TitleSectionWrapper = styled.div`
 	border-top: 10px solid ${({ theme }) => theme.color.primary};
 	position: relative;
 	overflow: hidden;
+	box-shadow: ${({ theme, $isFocused }) => ($isFocused ? `1px 1px 0px ${theme.color.mediumgray}` : 'none')};
 `;
 
 export const InputWrapper = styled.div`

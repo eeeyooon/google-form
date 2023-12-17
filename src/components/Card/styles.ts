@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.div<{ $isFocused: boolean }>`
 	width: 768px;
 	min-height: 138px;
 	border-radius: 10px;
@@ -9,6 +9,7 @@ export const CardWrapper = styled.div`
 	position: relative;
 	overflow: hidden;
 	border: 1px solid ${({ theme }) => theme.color.lightgray};
+	box-shadow: ${({ theme, $isFocused }) => ($isFocused ? `1px 1px 0px ${theme.color.mediumgray}` : 'none')};
 `;
 
 export const QuestionsWrapper = styled.div`
